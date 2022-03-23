@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="styles/form.css" />
+        <link rel="stylesheet" href="styles/quote.css" />
+
+        <script
+            src="https://kit.fontawesome.com/c77bafb584.js"
+            crossorigin="anonymous"
+            defer
+        ></script>
+        <script src="scripts/main.js" defer></script>
+        <script src="scripts/quote.js" defer></script>
+
+        <title>Fuel Quoter - Quote</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="brand">
+                    <i class="brand-icon fa-solid fa-gas-pump"></i>Fuel Quoter
+                </div>
+                <a href="api/logout">Logout</a>
+                <a href="history">History</a>
+                <a href="#" class="active">Get Quote</a>
+                <a href="profile">Profile</a>
+                <a href="/">Home</a>
+            </nav>
+        </header>
+
+        <div class="container">
+            <section>
+                <h1 class="center">Get Quote</h1>
+                <!-- Action POST to calculation endpoint -->
+                <form action="/" method="POST">
+                    <div>
+                        <label for="gallons-requested">Request Gallons:</label>
+                        <input
+                            type="number"
+                            id="gallons-requested"
+                            name="gallonsRequested"
+                            value="1"
+                            min="1"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label for="delivery-date">Delivery Date: </label>
+                        <input
+                            type="date"
+                            id="delivery-date"
+                            name="deliveryDate"
+                            required
+                        />
+                    </div>
+
+                    <input type="submit" value="Submit" />
+                </form>
+            </section>
+
+            <section class="output-container">
+                <div>
+                    <h3>Delivery Address:</h3>
+                    <p id="delivery-address">Loading...</p>
+                    <div>
+                        <a href="profile">Edit</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Price Estimates:</h3>
+                    <p>
+                        Suggested Price (per Gallon):
+                        <span id="unit-price" class="output">$1.50</span>
+                    </p>
+                    <p>
+                        Total Price:
+                        <span id="total-price" class="output">$30.00</span>
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            Fuel Quoter is a non-profit service.<br />
+            <span id="copyright">
+                Copyright &copy; 2022 All Rights Reserved
+            </span>
+        </footer>
+    </body>
+</html>

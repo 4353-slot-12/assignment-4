@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+/* Root */
+
+:root {
+    --darkest: #015249;
+    --dark: #57bc90;
+    --light: #77c9d4;
+    --lightest: #a5a5af;
+    --white: #f2f2f2;
+    --primary-font: "Playfair Display", serif;
+    --secondary-font: "Source Sans Pro", sans-serif;
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+    overflow: hidden;
+}
+
+div.container {
+    max-width: 1024px;
+    margin: auto;
+}
+
+/* Typography */
+
+h1,
+h2,
+h3 {
+    font-family: var(--primary-font);
+    color: var(--darkest);
+}
+
+p,
+label,
+div {
+    font-family: var(--secondary-font);
+}
+
+/* Navbar */
+
+nav {
+    width: 100%;
+    background-color: var(--darkest);
+    overflow: auto;
+    font-family: var(--secondary-font);
+    margin-bottom: 50px;
+}
+
+nav a,
+nav .brand {
+    text-align: center;
+    color: var(--white);
+    text-decoration: none;
+}
+
+nav a {
+    float: right;
+    font-size: 17px;
+    padding: 15px;
+}
+
+nav .brand {
+    float: left;
+    font-size: 20px;
+    padding: 12px;
+    font-family: var(--primary-font);
+}
+
+nav .brand-icon {
+    margin-right: 10px;
+}
+
+nav a:hover {
+    background-color: var(--dark);
+}
+
+.active {
+    background-color: var(--dark);
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+/* Footer */
+
+footer {
+    display: block;
+    background-color: var(--light);
+    color: var(--darkest);
+    font-family: var(--secondary-font);
+    text-align: center;
+    font-size: 15px;
+    padding: 12px;
+    margin-top: 50px;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 100%;
+}
+
+footer span {
+    font-size: 12px;
+}
+
+section {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+/* Utility */
+
+.center {
+    text-align: center;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: -300%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}

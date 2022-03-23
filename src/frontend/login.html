@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="styles/form.css" />
+
+        <script
+            src="https://kit.fontawesome.com/c77bafb584.js"
+            crossorigin="anonymous"
+            defer
+        ></script>
+        <script src="scripts/main.js" defer></script>
+        <!-- <script src="scripts/login.js" defer></script> -->
+
+        <title>Fuel Quoter - Login</title>
+    </head>
+    <body>
+        <header>
+            <nav id="nav-anonymous-user">
+                <div class="brand">
+                    <i class="brand-icon fa-solid fa-gas-pump"></i>Fuel Quoter
+                </div>
+                <a href="#" class="active">Login</a>
+                <a href="register">Register</a>
+                <a href="/">Home</a>
+            </nav>
+            <nav id="nav-authenticated-user">
+                <div class="brand">
+                    <i class="brand-icon fa-solid fa-gas-pump"></i>Fuel Quoter
+                </div>
+                <a href="api/logout">Logout</a>
+                <a href="history">History</a>
+                <a href="quote">Get Quote</a>
+                <a href="profile">Profile</a>
+                <a href="/">Home</a>
+            </nav>
+        </header>
+
+        <div class="container">
+            <section>
+                <form action="api/login" , method="POST">
+                    <label for="username">Username:</label>
+                    <input id="username" name="username" type="text" maxlength="50" />
+                    <br /><br />
+                    <label for="password">Password:</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        maxlength="50"
+                    />
+                    <br /><br />
+                    <input type="submit" value="Log In" />
+                </form>
+                <div class="center">
+                    <a href="register">Create a new account</a>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            Fuel Quoter is a non-profit service.<br />
+            <span id="copyright">
+                Copyright &copy; 2022 All Rights Reserved
+            </span>
+        </footer>
+    </body>
+</html>

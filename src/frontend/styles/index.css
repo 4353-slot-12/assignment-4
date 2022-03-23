@@ -1,0 +1,30 @@
+button {
+    background-color: var(--light);
+    padding: 12px 25px;
+    margin: auto;
+    text-align: center;
+    width: max-content;
+
+    display: inline-block !important;
+    cursor: pointer;
+    border: 0px;
+
+    font-size: 13px;
+    font-weight: 400 !important;
+    color: var(--darkest);
+    text-decoration: none;
+    letter-spacing: 2px;
+
+    transition: all 0.3s 0s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.04, 1);
+    background-color: var(--darkest);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.fine-print {
+    font-size: 9pt;
+}

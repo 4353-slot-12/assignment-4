@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="styles/history.css" />
+
+        <script
+            src="https://kit.fontawesome.com/c77bafb584.js"
+            crossorigin="anonymous"
+            defer
+        ></script>
+        <script src="scripts/main.js" defer></script>
+        <script src="scripts/history.js" defer></script>
+
+        <title>Fuel Quoter - History</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="brand">
+                    <i class="brand-icon fa-solid fa-gas-pump"></i>Fuel Quoter
+                </div>
+                <a href="api/logout">Logout</a>
+                <a href="#" class="active">History</a>
+                <a href="quote">Get Quote</a>
+                <a href="profile">Profile</a>
+                <a href="/">Home</a>
+            </nav>
+        </header>
+
+        <div class="container">
+            <section>
+                <h1>Quote History</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Gallons<br />Requested</th>
+                            <th>Delivery Address</th>
+                            <th>Delivery Date</th>
+                            <th>Suggested Price <br />(per Gallon)</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quote-history-table">
+                        <tr>
+                            <td>May 4, 2022 6:15AM</td>
+                            <td>22</td>
+                            <td>177A Bleecker Street</td>
+                            <td>May 9, 2022 6:15AM</td>
+                            <td>$ 3.00</td>
+                            <td>$ 66.00</td>
+                        </tr>
+                        <tr>
+                            <td>May 6, 2022 6:15AM</td>
+                            <td>35</td>
+                            <td>221B Baker Street</td>
+                            <td>May 12, 2022 6:15AM</td>
+                            <td>$ 3.00</td>
+                            <td>$ 105.00</td>
+                        </tr>
+                        <tr>
+                            <td>May 14, 2022 6:15AM</td>
+                            <td>21</td>
+                            <td>177A Bleecker Street</td>
+                            <td>May 22, 2022 6:15AM</td>
+                            <td>$ 3.00</td>
+                            <td>$ 63.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <footer>
+            Fuel Quoter is a non-profit service.<br />
+            <span id="copyright">
+                Copyright &copy; 2022 All Rights Reserved
+            </span>
+        </footer>
+    </body>
+</html>
