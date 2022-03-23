@@ -51,4 +51,4 @@ At this point, we can check if we did everything correctly by starting the serve
 npm run start
 ```
 
-Finally, open your Google Chrome or Firefox and visit `http://localhost:8000`. You should see that the website loaded cleanly. Make sure to check the developer console to see if you're getting any errors.
+Finally, open your Google Chrome or Firefox and visit `http://localhost:8080`. You should see that the website loaded cleanly. Make sure to check the developer console to see if you're getting any errors.
