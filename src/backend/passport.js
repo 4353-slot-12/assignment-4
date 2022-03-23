@@ -13,6 +13,7 @@ export function verifyCallback(username, password, done) {
 };
 
 export const serializeUser = (user, done) => done(null, user.id);
+
 export function deserializeUser(userId, done) {
   const user = UserService.findById(userId);
   if (user === undefined)

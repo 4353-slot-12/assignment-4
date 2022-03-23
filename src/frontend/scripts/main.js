@@ -8,7 +8,7 @@
 
 // Anon user view 
 const authNavBar = document.getElementById('nav-authenticated-user');
-authNavBar.style.display = "none";
+if (authNavBar) authNavBar.style.display = "none";
 
 function switchToAuthenticatedNavBar(isAuth) {
     if (!isAuth) return;
@@ -21,7 +21,7 @@ function switchToAuthenticatedNavBar(isAuth) {
     if (authNavBar) authNavBar.style.display = "block";
 }
 
-fetch('http://localhost:8000/api/auth', {
+fetch('http://localhost:8080api/auth', {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', 
     cache: 'no-cache', 

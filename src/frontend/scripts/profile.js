@@ -4,7 +4,7 @@ const accessDeniedMessage = "You'll be able to access this feature once you have
 
 // Runs on load to populate the address field.
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('http://localhost:8000/api/profile', {
+    fetch('http://localhost:8080/api/profile', {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', 
     cache: 'no-cache', 

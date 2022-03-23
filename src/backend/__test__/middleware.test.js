@@ -40,7 +40,7 @@ describe("middleware tests", () => {
     });
 
     test("secureStaticFiles true", () => {
-        req.url = 'http://localhost:8000/profile';
+        req.url = 'http://localhost:8080/profile';
         secureStaticFiles(req, res, next);
         expect(res.statusCode).toBeNull();
         expect(res.redirectUrl).toBeNull();
@@ -48,7 +48,7 @@ describe("middleware tests", () => {
     });
 
     test("secureStaticFiles false", () => {
-        req.url = 'http://localhost:8000/profile';
+        req.url = 'http://localhost:8080/profile';
         req.auth = false;
         secureStaticFiles(req, res, next);
         expect(res.statusCode).toBe(403);
