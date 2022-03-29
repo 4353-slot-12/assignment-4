@@ -2,6 +2,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,node,visualstudiocode,webstorm+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,node,visualstudiocode,webstorm+all
 
+#Custom
+
+env
+
 ### Linux ###
 *~
 
