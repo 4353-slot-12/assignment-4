@@ -1,7 +1,7 @@
 {
   "name": "cosc4353-team-12-assignment-2",
-  "version": "0.0.1",
-  "description": "website for denise delovely designs, by team 6",
+  "version": "0.1.0",
+  "description": "website for fuel quoting, by team 12",
   "main": "backend/index.js",
   "type": "module",
   "scripts": {
