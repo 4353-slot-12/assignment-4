@@ -1,3 +1,6 @@
+import { select_profile } from "../models";
+import "/models/index.js"
+
 const wordyRegex = /^\w+(\s+\w+){0,5}$/i;
 const zipRegex = /^\d{5}$/;
 
@@ -7,6 +10,7 @@ export class Profile {
         this.update(name, addr1, addr2, city, state, zip)
     }
 
+    // TODO: potentially safe to remove
     update(name, addr1, addr2, city, state, zip){
         this.name = name
         this.address1 = addr1
@@ -22,7 +26,7 @@ export class Profile {
     }
 }
 
-export let profiles = [];
+// export let profiles = [];
 
 export default class ProfileService {    
     static validateProfile(profile) {
@@ -35,21 +39,21 @@ export default class ProfileService {
     }
 
     static findByUserId(userId) { 
-        return profiles.find(profile => profile.userId === userId)
+        return select_profile(userId);
     }
 
-    static removeProfile(userId) {
-        const index = profiles.findIndex(profile => profile.userId === userId);
-        profiles = profiles.splice(index, 1);
-        return index;
-    }
+    // TODO: is this used anywhere...?
+    //static removeProfile(userId) { 
+    //    const index = profiles.findIndex(profile => profile.userId === userId);
+    //    profiles = profiles.splice(index, 1);
+    //    return index;
+    //}
 
     static addProfile(data){
-        profiles.push(new Profile(data.userId, data.name, data.address1, data.address2, data.city, data.state, data.zip));
+        insert_profile([data.userId, data.name, data.address1, data.address2, data.city, data.state, data.zip]);
     }
 
     static updateProfile(profile){ // Call using a Profile object
-        let selected = profiles.find(p => p.userId === profile.userId);
-        selected.update(profile.name, profile.address1, profile.address2, profile.city, profile.state, profile.zip);
+        update_profile(profile.userId, [profile.name, profile.address1, profile.address2, profile.city, profile.state, profile.zip]);
     }
 }

@@ -1,6 +1,6 @@
 import client from "../db.js";
 
-function select_profile(userId){
+export function select_profile(userId){
     var res;
     client.connect(function(err) {
         if(err) {
@@ -17,7 +17,7 @@ function select_profile(userId){
     return res;
 }
 
-function insert_profile(profile){ // Pass profile as a list!
+export function insert_profile(profile){ // Pass profile as a list!
     client.connect(function(err) {
         if(err) {
           return console.error('could not connect to postgres', err);
@@ -33,12 +33,18 @@ function insert_profile(profile){ // Pass profile as a list!
       });
 }
 
-function update_profile(userId){
+export function update_profile(userId, profile){ // Pass profile as a list.
     client.connect(function(err) {
         if(err) {
           return console.error('could not connect to postgres', err);
         }
-        client.query('UPDATE userprofiles SET (!unfinished!) WHERE userId = ' + userId, function(err, result) {
+        client.query('UPDATE userprofiles SET name = '  + profile[0] 
+        + ', address1 = ' + profile[1] 
+        + ', address2 = ' + profile[2] 
+        + ', city = ' + profile[3] 
+        + ', state = ' + profile[4] 
+        + ', zip = ' + profile[5]
+        + ' WHERE userId = ' + userId, function(err, result) {
           if(err) {
             return console.error('error running query', err);
           }
