@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import UserModel from '../models/user.js';
 
 export const users = [];
 
@@ -16,22 +17,17 @@ export default class UserService {
     }
 
     static findByUsername(username) {
-        return users.find(user => user.username === username);
+        return UserModel.findByUsername(username);
     }
 
     static findById(id) {
-        return users.find(user => user.id === id);
+        return UserModel.findById(id);
     }
 
     static insertUser(username, password) {
         const salt = UserService.generateSalt();
-        const newUser = {
-            id: UserService.generateUserId(),
-            username: username,
-            hash: UserService.generateHash(password, salt),
-            salt: salt,
-        };
-        users.push(newUser);
+        const hash = UserService.generateHash(password, salt);
+        return UserModel.create(username, hash, salt);
     }
 
     static verifyPassword(user, password) {

@@ -1,13 +1,12 @@
 import pg from "pg";
 import dotenv from "dotenv";
 
-//or native libpq bindings
-//var pg = require('pg').native
-
 dotenv.config()
 
 var conString = process.env.CONNECTION_STRING; // Can be found in the Details page
 var client = new pg.Client(conString);
+
+// Example
 client.connect(function(err) {
   if(err) {
     return console.error('could not connect to postgres', err);
