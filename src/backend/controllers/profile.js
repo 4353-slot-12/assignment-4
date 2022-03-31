@@ -11,7 +11,7 @@ export default class ProfileController {
         if (invalidField) 
             return res.status(428).send({ message: `Invalid ${invalidField} field.`})
     
-        ProfileService.addProfile(profile);
+        await ProfileService.addProfile(profile);
         return res.redirect('/quote');
     }
     
@@ -26,13 +26,13 @@ export default class ProfileController {
         if (invalidField) 
             return res.status(428).send({ message: `Invalid ${invalidField} field.`});
         
-        ProfileService.updateProfile(profile);
+        await ProfileService.updateProfile(profile);
         return res.redirect('/quote');
     }
     
     
     static async get(req, res) {
-        const profile = ProfileService.findByUserId(req.user.id);
+        const profile = await ProfileService.findByUserId(req.user.id);
         if (profile === undefined)
             return res.redirect('/proto-profile');
         return res.status(200).send({data: profile});

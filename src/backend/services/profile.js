@@ -25,7 +25,7 @@ export class Profile {
 }
 
 export default class ProfileService {    
-    static async validateProfile(profile) {
+    static validateProfile(profile) {
         for (const [key, value] of Object.entries(profile)) {
             if (key === 'address2' && !value.length) continue;
             const regex = key === 'zip' ? zipRegex : wordyRegex;

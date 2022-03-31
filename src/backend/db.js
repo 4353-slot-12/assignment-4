@@ -17,7 +17,7 @@ client.connect(function(err) {
       return console.error('error running query', err);
     }
     console.log(result.rows[0].theTime);
-    client.end(); // Remember to do this!
+    //client.end();
   });
 });
 

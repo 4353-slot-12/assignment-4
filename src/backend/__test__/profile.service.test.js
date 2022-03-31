@@ -1,16 +1,11 @@
 import ProfileService, { Profile } from '../services/profile.js';
 import { expect } from '@jest/globals';
-import UserService from '../services/user.js';
-
-UserService.insertUser("test", "test");
-let USER_ID = UserService.findByUsername("test").id;
-console.log(USER_ID);
 
 test('Add profile', async () => {
     let payload = new Profile(0, "a", "b", "c", "d", "e", "f");
     await ProfileService.addProfile(payload);
     let res = await ProfileService.findByUserId(0);
-    expect(res).toBe(payload);
+    expect(res).toEqual(payload);
 });
 
 test('Modify profile', async () => {
@@ -22,15 +17,17 @@ test('Modify profile', async () => {
 
     let ret = await ProfileService.findByUserId(1);
 
-    expect(ret).not.toBe(payload1);
-    expect(ret).toBe(payload2);
+    expect(ret).not.toEqual(payload1);
+    expect(ret).toEqual(payload2);
+
+    await ProfileService.removeProfile(1)
 });
 
 test('Remove profile', async () => {
     let payload = new Profile(0, "a", "b", "c", "d", "e", "f");
     await ProfileService.removeProfile(0);
     let ret = await ProfileService.findByUserId(0);
-    expect(ret).not.toBe(payload);
+    expect(ret).not.toEqual(payload);
 });
 
 test('Validate valid profile', async () => {
