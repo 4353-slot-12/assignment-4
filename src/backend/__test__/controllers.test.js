@@ -1,5 +1,5 @@
 import { beforeEach, expect, test, describe } from "@jest/globals";
-import ProfileService, { profiles } from "../services/profile.js";
+import ProfileService from "../services/profile.js";
 import UserController from "../controllers/user.js";
 import ProfileController from "../controllers/profile.js";
 import QuoteController from "../controllers/quote.js";
@@ -44,7 +44,6 @@ const res = {
 
 describe('controllers', () => {
     beforeEach(() => {
-        profiles.length = 0;
         req.body.name = 'bob sagat';
         req.auth = true;
         req.url = null;
@@ -101,7 +100,7 @@ describe('controllers', () => {
         expect(res.statusCode).toBe(304);
     })
 
-    test('create profile', () => {
+    test('create profile', async() => {
         ProfileController.create(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
@@ -115,7 +114,7 @@ describe('controllers', () => {
         expect(res.redirectUrl).toBeNull();
     });
 
-    test('edit profile', () => {
+    test('edit profile', async() => {
         const data = { ...req.body, userId: req.user.id };
         ProfileService.addProfile(data);
 
@@ -124,7 +123,7 @@ describe('controllers', () => {
         expect(res.redirectUrl).toBe('/quote');
     });
 
-    test('edit invalid profile', () => {
+    test('edit invalid profile', async() => {
         const data = { ...req.body, userId: req.user.id };
         ProfileService.addProfile(data);
 
@@ -135,7 +134,7 @@ describe('controllers', () => {
         expect(res.redirectUrl).toBeNull();
     });
 
-    test('get profile', () => {
+    test('get profile', async() => {
         const data = { ...req.body, userId: req.user.id };
         ProfileService.addProfile(data);
         ProfileController.get(req, res);
@@ -143,7 +142,7 @@ describe('controllers', () => {
         expect(res.sent).toEqual({ data })
     });
 
-    test('get profile no exist', () => {
+    test('get profile no exist', async() => {
         ProfileController.get(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe("/proto-profile");
