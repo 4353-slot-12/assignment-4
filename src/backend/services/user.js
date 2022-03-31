@@ -3,27 +3,27 @@ import crypto from 'crypto';
 export const users = [];
 
 export default class UserService {
-    static generateHash(password, salt) {
+    static async generateHash(password, salt) {
         return crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha256').toString('hex');
     }
 
-    static generateSalt() {
+    static async generateSalt() {
         return crypto.randomBytes(16).toString('hex');
     }
 
-    static generateUserId() {
+    static async generateUserId() {
         return crypto.randomBytes(12).toString('hex');
     }
 
-    static findByUsername(username) {
+    static async findByUsername(username) {
         return users.find(user => user.username === username);
     }
 
-    static findById(id) {
+    static async findById(id) {
         return users.find(user => user.id === id);
     }
 
-    static insertUser(username, password) {
+    static async insertUser(username, password) {
         const salt = UserService.generateSalt();
         const newUser = {
             id: UserService.generateUserId(),
@@ -34,7 +34,7 @@ export default class UserService {
         users.push(newUser);
     }
 
-    static verifyPassword(user, password) {
+    static async verifyPassword(user, password) {
         const givenHash = UserService.generateHash(password, user.salt);
         if (givenHash === user.hash)
             return true;
