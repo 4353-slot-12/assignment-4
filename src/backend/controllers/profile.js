@@ -1,7 +1,7 @@
 import ProfileService from '../services/profile.js';
 
 export default class ProfileController {
-    static create(req, res) {
+    static async create(req, res) {
         const profile = {
             userId: req.user.id,
             ...req.body,
@@ -16,7 +16,7 @@ export default class ProfileController {
     }
     
     
-    static edit(req, res) {
+    static async edit(req, res) {
         const profile = {
             userId: req.user.id,
             ...req.body,
@@ -31,7 +31,7 @@ export default class ProfileController {
     }
     
     
-    static get(req, res) {
+    static async get(req, res) {
         const profile = ProfileService.findByUserId(req.user.id);
         if (profile === undefined)
             return res.redirect('/proto-profile');

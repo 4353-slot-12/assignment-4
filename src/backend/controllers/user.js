@@ -4,7 +4,7 @@ import UserService from '../services/user.js';
 const wordyRegex = /^\w+$/i;
 
 export default class UserController {
-    static login(req, res) {
+    static async login(req, res) {
         if (req.isAuthenticated())
             return res.redirect('/quote');
         const authenticateUser = passport.authenticate('local', {
@@ -14,12 +14,12 @@ export default class UserController {
         authenticateUser(req, res, () => res.redirect('/login'));
     }
 
-    static logout(req, res) {
+    static async logout(req, res) {
         req.logout();
         res.redirect('/');
     }
 
-    static register(req, res) {
+    static async register(req, res) {
         const username = req.body.username;
         const password = req.body.password;
         const confirmPassword = req.body.confirmPassword;
@@ -34,7 +34,7 @@ export default class UserController {
         authenticateUser(req, res, () => res.redirect('/proto-profile'));
     }
 
-    static auth(req, res) {
+    static async auth(req, res) {
         res.status(200).send({ authenticated: req.isAuthenticated() });
     }
 }

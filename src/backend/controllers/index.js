@@ -5,7 +5,7 @@ import UserService from '../services/user.js';
 
 const wordyRegex = /^\w+$/i;
 
-export function loginController(req, res) {
+export async function loginController(req, res) {
     if (req.isAuthenticated())
         return res.redirect('/quote');
     const authenticateUser = passport.authenticate('local', {
@@ -15,12 +15,12 @@ export function loginController(req, res) {
     authenticateUser(req, res, () => res.redirect('/login'));
 }
 
-export function logoutController(req, res) {
+export async function logoutController(req, res) {
     req.logout();
     res.redirect('/');
 }
 
-export function createProfileController(req, res) {
+export async function createProfileController(req, res) {
     const profile = {
         userId: req.user.id,
         ...req.body,
@@ -34,7 +34,7 @@ export function createProfileController(req, res) {
     return res.redirect('/quote');
 }
 
-export function editProfileController(req, res) {
+export async function editProfileController(req, res) {
     console.log("put hehe")
     const profile = {
         userId: req.user.id,
@@ -52,14 +52,14 @@ export function editProfileController(req, res) {
     return res.redirect('/quote');
 }
 
-export function getProfileController(req, res) {
+export async function getProfileController(req, res) {
     const profile = ProfileService.findByUserId(req.user.id);
     if (profile === undefined)
         return res.status(404).redirect('/proto-profile');
     return res.status(302).send({data: profile});
 }
 
-export function registerController(req, res) {
+export async function registerController(req, res) {
     const username = req.body.username;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
@@ -74,7 +74,7 @@ export function registerController(req, res) {
     authenticateUser(req, res, () => res.redirect('/proto-profile'));
 }
 
-export function authController(req, res) {
+export async function authController(req, res) {
     res.status(200).send({ authenticated: req.isAuthenticated() });
 }
 
