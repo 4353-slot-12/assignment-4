@@ -4,6 +4,8 @@ import path from 'path';
 import morgan from 'morgan';
 import cors from 'cors';
 import session from 'express-session';
+import createPgSession from 'connect-pg-simple';
+import { conString } from './db.js';
 import passport from './passport.js'
 import router from './routes/index.js';
 import { secureStaticFiles } from './middleware/index.js';
@@ -18,8 +20,12 @@ app.use(cors());
 
 app.use(methodOverride('_method'));
 
+const pgSession = createPgSession(session);
+const sessionStore = new pgSession({ conString });
+
 app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard-cat',
+    store: sessionStore,
     resave: false,
     saveUninitialized: true,
     cookie: {

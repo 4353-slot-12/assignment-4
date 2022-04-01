@@ -1,6 +1,7 @@
-import client from "../db.js";
+import { client } from "../db.js";
 
-class UserModel {
+export default class UserModel {
+  
     static create(username, hash, salt) {
         client.connect(function(err) {
             if(err) {
