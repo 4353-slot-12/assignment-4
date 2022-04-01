@@ -1,4 +1,4 @@
-
+import insertQuote, {getQuoteHistory} from "../models/quote.js"
 export const quotes = new Map();
 
 const numberRegex = /^\d+$/;
@@ -21,6 +21,7 @@ export default class QuoteService {
     }
 
     static async insert(userId, data, profile) {
+        /* 
         data.gallonsRequested = parseInt(data.gallonsRequested);
         const quote = { 
             deliveryAddress: profile?.fullAddress,
@@ -30,11 +31,13 @@ export default class QuoteService {
             ...data,
         };
         if (quotes.has(userId)) quotes.get(userId).push(quote);
-        else quotes.set(userId, [quote]);
-        return quote;
+        else quotes.set(userId, [quote]); 
+        */
+        await insertQuote(userId, data, profile)
+        //return quote;
     }
 
-    static async getHistory(userId) { 
-        return quotes.get(userId);
+    static async getHistory(userId) {
+        return await getQuoteHistory()
     }
 }

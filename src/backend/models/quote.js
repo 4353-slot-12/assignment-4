@@ -1,7 +1,7 @@
 import client from "../db.js";
 import QuoteService from '../services/quote.js';
 
-async function insertQuote(userId, data, profile) {
+export default async function insertQuote(userId, data, profile) {
     try {
         quote = QuoteService.insert(userId, data, profile)
         await client.connect();
@@ -12,7 +12,7 @@ async function insertQuote(userId, data, profile) {
     }
 }
 
-async function getQuoteHistory() {
+export async function getQuoteHistory() {
     try {
         await client.connect();
         const data = await client.query(`SELECT * FROM FuelQuote`);
@@ -23,20 +23,20 @@ async function getQuoteHistory() {
     }
 }
 
-test("quote insert", () => {
-    const userId = "abc";
-    const data = {
-        gallonsRequested: 5,
-        deliveryDate: "2022-03-13"
-    };
-    const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-    const quote = QuoteService.insert(userId, data, profile);
-    expect(quote).toHaveProperty("gallonsRequested")
-    expect(quote).toHaveProperty("deliveryDate")
-    expect(quote).toHaveProperty("deliveryAddress")
-    expect(quote).toHaveProperty("timeStamp")
-    expect(quote).toHaveProperty("suggestedPrice")
-    expect(quote).toHaveProperty("totalPrice")
-    expect(quote.suggestedPrice).toMatch(dollarsRegex);
-    expect(quote.totalPrice).toMatch(dollarsRegex);
-});
+// test("quote insert", () => {
+//     const userId = "abc";
+//     const data = {
+//         gallonsRequested: 5,
+//         deliveryDate: "2022-03-13"
+//     };
+//     const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
+//     const quote = QuoteService.insert(userId, data, profile);
+//     expect(quote).toHaveProperty("gallonsRequested")
+//     expect(quote).toHaveProperty("deliveryDate")
+//     expect(quote).toHaveProperty("deliveryAddress")
+//     expect(quote).toHaveProperty("timeStamp")
+//     expect(quote).toHaveProperty("suggestedPrice")
+//     expect(quote).toHaveProperty("totalPrice")
+//     expect(quote.suggestedPrice).toMatch(dollarsRegex);
+//     expect(quote.totalPrice).toMatch(dollarsRegex);
+// });
