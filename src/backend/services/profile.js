@@ -1,3 +1,5 @@
+import select_profile, {remove_profile, insert_profile, update_profile} from "../models/index.js";
+
 const wordyRegex = /^\w+(\s+\w+){0,5}$/i;
 const zipRegex = /^\d{5}$/;
 
@@ -7,13 +9,13 @@ export class Profile {
         this.update(name, addr1, addr2, city, state, zip)
     }
 
-    update(name, addr1, addr2, city, state, zip){
-        this.name = name
-        this.address1 = addr1
-        this.address2= addr2
-        this.city = city
-        this.state = state
-        this.zip = zip
+    update(n, a1, a2, c, s, z){
+        this.name = n;
+        this.address1 = a1;
+        this.address2 = a2;
+        this.city = c;
+        this.state = s;
+        this.zip = z;
     }
 
     get fullAddress() {
@@ -21,8 +23,6 @@ export class Profile {
         return `${this.address1}<br>${address2}${this.city}, ${this.state} - ${this.zip}`;
     }
 }
-
-export let profiles = [];
 
 export default class ProfileService {    
     static validateProfile(profile) {
@@ -34,22 +34,19 @@ export default class ProfileService {
         }
     }
 
-    static findByUserId(userId) { 
-        return profiles.find(profile => profile.userId === userId)
+    static async findByUserId(userId) { 
+        return await select_profile(userId);
     }
 
-    static removeProfile(userId) {
-        const index = profiles.findIndex(profile => profile.userId === userId);
-        profiles = profiles.splice(index, 1);
-        return index;
+    static async removeProfile(userId) { 
+        await remove_profile(userId);
     }
 
-    static addProfile(data){
-        profiles.push(new Profile(data.userId, data.name, data.address1, data.address2, data.city, data.state, data.zip));
+    static async addProfile(data){
+        await insert_profile([data.userId, data.name, data.address1, data.address2, data.city, data.state, data.zip]);
     }
 
-    static updateProfile(profile){ // Call using a Profile object
-        let selected = profiles.find(p => p.userId === profile.userId);
-        selected.update(profile.name, profile.address1, profile.address2, profile.city, profile.state, profile.zip);
+    static async updateProfile(profile){ // Call using a Profile object
+        await update_profile(profile.userId, [profile.name, profile.address1, profile.address2, profile.city, profile.state, profile.zip]);
     }
 }
