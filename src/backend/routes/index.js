@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router } from 'express-promise-router';
 import { isAuth } from '../middleware/index.js'
 import UserController from '../controllers/user.js';
 import ProfileController from '../controllers/profile.js';

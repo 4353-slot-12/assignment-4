@@ -1,12 +1,12 @@
 {
   "name": "cosc4353-team-12-assignment-2",
-  "version": "0.0.1",
-  "description": "website for denise delovely designs, by team 6",
+  "version": "0.1.0",
+  "description": "website for fuel quoting, by team 12",
   "main": "backend/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/backend/index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "start": "npm install && node src/backend/index.js",
+    "test": "npm install && node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "repository": {
     "type": "git",
@@ -15,9 +15,11 @@
   "author": "Adil Iqbal, Scott Tran, Jacob Hidgon",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "connect-pg-simple": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "express-promise-router": "^4.1.1",
     "express-session": "^1.17.2",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",

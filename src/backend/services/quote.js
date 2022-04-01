@@ -16,11 +16,11 @@ function generateTimestamp() {
 }
 
 export default class QuoteService {
-    static invalidData(data) {
+    static async invalidData(data) {
         return !numberRegex.test(data.gallonsRequested) || !dateRegex.test(data.deliveryDate);
     }
 
-    static insert(userId, data, profile) {
+    static async insert(userId, data, profile) {
         data.gallonsRequested = parseInt(data.gallonsRequested);
         const quote = { 
             deliveryAddress: profile?.fullAddress,
@@ -34,7 +34,7 @@ export default class QuoteService {
         return quote;
     }
 
-    static getHistory(userId) { 
+    static async getHistory(userId) { 
         return quotes.get(userId);
     }
 }
