@@ -1,11 +1,11 @@
-import { Router } from 'express-promise-router';
+import epr from 'express-promise-router';
 import { isAuth } from '../middleware/index.js'
 import UserController from '../controllers/user.js';
 import ProfileController from '../controllers/profile.js';
 import QuoteController from '../controllers/quote.js';
 import SampleController from '../controllers/sample.js';
 
-const router = Router();
+const router = epr();
 
 router.get('/auth', UserController.auth)
 router.post('/login', UserController.login);

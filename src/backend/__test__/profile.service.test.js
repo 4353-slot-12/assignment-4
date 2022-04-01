@@ -25,7 +25,7 @@ test('Modify profile', async () => {
 
 test('Remove profile', async () => {
     let payload = new Profile(0, "a", "b", "c", "d", "e", "f");
-    await ProfileService.removeProfile(0);
+    await ProfileService.removeProfile(0); // Removes the profile created in the add profile test!!
     let ret = await ProfileService.findByUserId(0);
     expect(ret).not.toEqual(payload);
 });
