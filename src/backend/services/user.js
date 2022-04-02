@@ -16,21 +16,22 @@ export default class UserService {
         return crypto.randomBytes(12).toString('hex');
     }
 
-    static findByUsername(username) {
-        return UserModel.findByUsername(username);
+    static async findByUsername(username) {
+        return await UserModel.findByUsername(username);
     }
 
-    static findById(id) {
-        return UserModel.findById(id);
+    static async findById(id) {
+        return await UserModel.findById(id);
     }
 
-    static  insertUser(username, password) {
+    static async insertUser(username, password) {
+        const id = UserService.generateUserId();
         const salt = UserService.generateSalt();
         const hash = UserService.generateHash(password, salt);
-        return UserModel.create(username, hash, salt);
+        return await UserModel.create(id, username, hash, salt);
     }
 
-    static  verifyPassword(user, password) {
+    static verifyPassword(user, password) {
         const givenHash = UserService.generateHash(password, user.salt);
         if (givenHash === user.hash)
             return true;

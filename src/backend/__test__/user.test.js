@@ -46,8 +46,10 @@ describe('verify password tests', () => {
     })
 });
 
-test("insert user test", () => {
-    UserService.insertUser("bob", "keyboardCat");
+test("insert user test", async () => {
+    await UserService.insertUser("bob", "keyboardCat");
+
+    // TODO: Fix test.
     expect(users).toEqual(
         expect.arrayContaining([
             expect.objectContaining({ username: 'bob' }),
@@ -62,25 +64,25 @@ describe("find user by username", () => {
         users.length = 0;
     })
 
-    test("by username, success", () => {
-        UserService.insertUser("bob", "keyboardCat");
-        const user = UserService.findByUsername("bob");
+    test("by username, success", async () => {
+        await UserService.insertUser("bob", "keyboardCat");
+        const user = await UserService.findByUsername("bob");
         expect(user).toMatchObject({ username: "bob" });
     })
 
-    test("by username, failure", () => {
-        const user = UserService.findByUsername("doesNotExist");
+    test("by username, failure", async () => {
+        const user = await UserService.findByUsername("doesNotExist");
         expect(user).toBe(undefined);
     })
 
-    test("by id, success", () => {
-        UserService.insertUser("bob", "keyboardCat");
-        const user = UserService.findById(users[0].id);
+    test("by id, success", async () => {
+        await UserService.insertUser("bob", "keyboardCat");
+        const user = await UserService.findById(users[0].id);
         expect(user).toMatchObject({ username: "bob" });
     })
 
-    test("by id, failure", () => {
-        const user = UserService.findById("doesNotExist");
+    test("by id, failure", async () => {
+        const user = await UserService.findById("doesNotExist");
         expect(user).toBe(undefined);
     })
 })

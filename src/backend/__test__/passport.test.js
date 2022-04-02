@@ -9,41 +9,41 @@ function done(err, user) {
     params.user = user;
 }
 
-describe("passport.js", () => {
+describe("passport.js", async () => {
     beforeEach(() => {
         users.length = 0;
         params = {};
     });
 
-    test("verifyCallback user not found", () => {
-        verifyCallback("username", "password", done);
+    test("verifyCallback user not found", async () => {
+        await verifyCallback("username", "password", done);
         expect(params.err).toBe("User does not exist");
         expect(params.user).toBe(undefined);
     });
 
-    test("verifyCallback password verify failed", () => {
-        UserService.insertUser("username", "correctPass")
+    test("verifyCallback password verify failed", async () => {
+        await UserService.insertUser("username", "correctPass")
         verifyCallback("username", "wrongPass", done);
         expect(params.err).toBeNull();
         expect(params.user).toBe(false);
     });
 
-    test("verifyCallback success", () => {
-        UserService.insertUser("username", "correctPass")
+    test("verifyCallback success", async () => {
+        await UserService.insertUser("username", "correctPass")
         verifyCallback("username", "correctPass", done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0]);
     });
 
-    test("serializeUser success", () => {
-        UserService.insertUser("username", "correctPass")
+    test("serializeUser success", async () => {
+        await UserService.insertUser("username", "correctPass")
         serializeUser(users[0], done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0].id);
     });
 
-    test("deserializeUser success", () => {
-        UserService.insertUser("username", "correctPass")
+    test("deserializeUser success", async () => {
+        await UserService.insertUser("username", "correctPass")
         deserializeUser(users[0].id, done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0]);
