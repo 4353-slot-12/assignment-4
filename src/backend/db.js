@@ -6,7 +6,7 @@ import path from 'path';
 dotenv.config()
 
 export const conString = process.env.CONNECTION_STRING; // Can be found in the Details page
-export const client = new pg.Client(conString);
+const client = new pg.Client(conString);
 
 const dbSqlPath = path.join(process.cwd(), 'src', 'backend', 'db.sql');
 const initDatabaseSql = fs.readFileSync(dbSqlPath, 'utf8');
@@ -31,4 +31,4 @@ client.connect(function(err) {
   });
 });
 
-
+export default client;

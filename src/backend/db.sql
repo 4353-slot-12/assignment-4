@@ -1,11 +1,4 @@
-DROP TABLE IF EXISTS "session";
 DROP TABLE IF EXISTS "users";
-
-CREATE TABLE public.session (
-    SID CHARACTER varying NOT NULL,
-    sess JSON NOT NULL,
-    expire TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL
-);
 
 CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,

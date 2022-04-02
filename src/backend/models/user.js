@@ -1,4 +1,4 @@
-import { client } from "../db.js";
+import client from "../db.js";
 
 export default class UserModel {
   
