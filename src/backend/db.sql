@@ -30,6 +30,5 @@ CREATE TABLE "userprofiles" (
     "zip" VARCHAR(5)
 )
 
--- Insert data needed for testing.
 
 
