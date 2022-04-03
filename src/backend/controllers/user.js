@@ -27,8 +27,9 @@ export default class UserController {
         if (!wordyRegex.test(username) || !wordyRegex.test(password) || password != confirmPassword) 
             return res.redirect('/register');
     
-        if (UserService.findByUsername(username) == undefined) 
-            UserService.insertUser(username, password);
+        const user = await UserService.findByUsername(username);
+        if (user == undefined) 
+            await UserService.insertUser(username, password);
     
         const authenticateUser = passport.authenticate('local');
         authenticateUser(req, res, () => res.redirect('/proto-profile'));

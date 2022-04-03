@@ -2,31 +2,31 @@ import ProfileService, { Profile } from '../services/profile.js';
 import { expect } from '@jest/globals';
 
 test('Add profile', async () => {
-    let payload = new Profile(0, "a", "b", "c", "d", "e", "f");
+    let payload = new Profile("0", "a", "b", "c", "d", "e", "f");
     await ProfileService.addProfile(payload);
-    let res = await ProfileService.findByUserId(0);
+    let res = await ProfileService.findByUserId("0");
     expect(res).toEqual(payload);
 });
 
 test('Modify profile', async () => {
-    let payload1 = new Profile(1, "a", "b", "c", "d", "e", "f")
-    let payload2 = new Profile(1, "e", "b", "q", "d", "Z", "f")
+    let payload1 = new Profile("1", "a", "b", "c", "d", "e", "f")
+    let payload2 = new Profile("1", "e", "b", "q", "d", "Z", "f")
 
     await ProfileService.addProfile(payload1)
     await ProfileService.updateProfile(payload2)
 
-    let ret = await ProfileService.findByUserId(1);
+    let ret = await ProfileService.findByUserId("1");
 
     expect(ret).not.toEqual(payload1);
     expect(ret).toEqual(payload2);
 
-    await ProfileService.removeProfile(1)
+    await ProfileService.removeProfile("1")
 });
 
 test('Remove profile', async () => {
-    let payload = new Profile(0, "a", "b", "c", "d", "e", "f");
-    await ProfileService.removeProfile(0); // Removes the profile created in the add profile test!!
-    let ret = await ProfileService.findByUserId(0);
+    let payload = new Profile("0", "a", "b", "c", "d", "e", "f");
+    await ProfileService.removeProfile("0"); // Removes the profile created in the add profile test!!
+    let ret = await ProfileService.findByUserId("0");
     expect(ret).not.toEqual(payload);
 });
 

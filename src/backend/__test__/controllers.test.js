@@ -104,6 +104,7 @@ describe('controllers', () => {
         ProfileController.create(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
+        ProfileController.removeProfile(req.user.id);
     });
 
     test('create invalid profile', () => {
@@ -121,6 +122,8 @@ describe('controllers', () => {
         ProfileController.edit(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
+
+        ProfileController.removeProfile(req.user.id);
     });
 
     test('edit invalid profile', async() => {
@@ -140,6 +143,7 @@ describe('controllers', () => {
         ProfileController.get(req, res);
         expect(res.statusCode).toBe(200);
         expect(res.sent).toEqual({ data })
+        ProfileController.removeProfile(req.user.id);
     });
 
     test('get profile no exist', async() => {

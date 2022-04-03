@@ -15,43 +15,43 @@ describe("passport.js", () => {
         params = {};
     });
 
-    test("verifyCallback user not found", () => {
-        verifyCallback("username", "password", done);
+    test("verifyCallback user not found", async () => {
+        await verifyCallback("username", "password", done);
         expect(params.err).toBe("User does not exist");
         expect(params.user).toBe(undefined);
     });
 
-    test("verifyCallback password verify failed", () => {
-        UserService.insertUser("username", "correctPass")
-        verifyCallback("username", "wrongPass", done);
+    test("verifyCallback password verify failed", async () => {
+        await UserService.insertUser("username", "correctPass")
+        await verifyCallback("username", "wrongPass", done);
         expect(params.err).toBeNull();
         expect(params.user).toBe(false);
     });
 
-    test("verifyCallback success", () => {
-        UserService.insertUser("username", "correctPass")
-        verifyCallback("username", "correctPass", done);
+    test("verifyCallback success", async () => {
+        await UserService.insertUser("username", "correctPass")
+        await verifyCallback("username", "correctPass", done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0]);
     });
 
-    test("serializeUser success", () => {
-        UserService.insertUser("username", "correctPass")
+    test("serializeUser success", async () => {
+        await UserService.insertUser("username", "correctPass")
         serializeUser(users[0], done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0].id);
     });
 
-    test("deserializeUser success", () => {
-        UserService.insertUser("username", "correctPass")
-        deserializeUser(users[0].id, done);
+    test("deserializeUser success", async () => {
+        await UserService.insertUser("username", "correctPass")
+        await deserializeUser(users[0].id, done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0]);
     });
 
-    test("deserializeUser failure", () => {
+    test("deserializeUser failure", async () => {
         const fakeId = UserService.generateUserId();
-        deserializeUser(fakeId, done);
+        await deserializeUser(fakeId, done);
         expect(params.err).toBe("User not found");
         expect(params.user).toBe(undefined);
     });

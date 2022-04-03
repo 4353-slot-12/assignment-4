@@ -3,8 +3,8 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import UserService from './services/user.js';
 
 
-export function verifyCallback(username, password, done) {
-  const user = UserService.findByUsername(username);
+export async function verifyCallback(username, password, done) {
+  const user = await UserService.findByUsername(username);
   if (user === undefined) return done("User does not exist");
   
   const hash = UserService.generateHash(password, user.salt);
@@ -14,8 +14,8 @@ export function verifyCallback(username, password, done) {
 
 export const serializeUser = (user, done) => done(null, user.id);
 
-export function deserializeUser(userId, done) {
-  const user = UserService.findById(userId);
+export async function deserializeUser(userId, done) {
+  const user = await UserService.findById(userId);
   if (user === undefined)
     return done("User not found")
   return done(null, user);

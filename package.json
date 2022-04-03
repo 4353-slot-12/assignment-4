@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npm install && node src/backend/index.js",
-    "test": "npm install && node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "repository": {
     "type": "git",
