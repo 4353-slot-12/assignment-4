@@ -32,7 +32,7 @@ CREATE TABLE "userprofiles" (
 );
 
 CREATE TABLE "fuelquote" (
-    "userid" VARCHAR(24) FOREIGN KEY,
+    "userid" VARCHAR(24),
     "timeStamp" VARCHAR(255),
     "gallonsRequested" VARCHAR(255),
     "deliveryAddress" VARCHAR(255),

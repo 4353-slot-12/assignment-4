@@ -38,6 +38,6 @@ export default class QuoteService {
     }
 
     static async getHistory(userId) {
-        return await getQuoteHistory()
+        return await getQuoteHistory(userId)
     }
 }

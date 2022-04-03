@@ -12,10 +12,10 @@ export default async function insertQuote(userId, quote, profile) {
     }
 }
 
-export async function getQuoteHistory() {
+export async function getQuoteHistory(userId) {
     try {
-        const data = await client.query(`SELECT * FROM FuelQuote`);
-        return data;
+        const data = await client.query(`SELECT * FROM FuelQuote WHERE userId = $1`, [userId]);
+        return data.rows;
     } catch(err) {
         console.log(err);
     }
