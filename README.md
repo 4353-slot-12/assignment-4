@@ -11,6 +11,10 @@ This project requires version control via Git. You can find it here:
 
 https://git-scm.com/downloads
 
+This project requires a Postgres SQL Database. You can find it here:
+
+https://www.postgresql.org/download/
+
 ### Step 2: Clone the repository
 Open a terminal or command prompt and navigate to your desired directory (for example, your Desktop). You can use the `cd` command to accomplish this.
 
