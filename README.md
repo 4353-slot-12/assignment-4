@@ -29,7 +29,7 @@ cd assignment-4
 
 ### Step 3: Prepare a Postgres SQL Database
 
-To prepare you database, please run the following query:
+To prepare your database, please run the following query:
 
 ```sql
 DROP TABLE IF EXISTS "session";
