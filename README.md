@@ -29,7 +29,7 @@ cd assignment-4
 
 ### Step 3: Prepare a Postgres SQL Database
 
-This project requires a Postgres SQL Database. To prepare the database to run this project, please run the following query:
+To prepare you database, please run the following query:
 
 ```sql
 DROP TABLE IF EXISTS "session";
@@ -67,9 +67,9 @@ CREATE TABLE "userprofiles" (
 ```
 
 ### Step 4: Ensure that the `.env` file is present.
-This project will not run unless the necessary environment variables are set. The necessary environment variables must be set via a `.env` file in the root directory (the same directory as this README file).
+Environment variables must be set via a `.env` file in the root directory (the same directory as this README file).
 
-Below is an example of a `.env` file.
+Below is an example of a compatible `.env` file.
 
 ```
 PORT=5000
