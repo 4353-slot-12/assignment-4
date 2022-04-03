@@ -9,7 +9,7 @@ const dollarsRegex = /^\$[\d,]+.\d{2}$/;
 describe("quote service tests", () => {
     let userId = null;
 
-    beforeEach(async () => {
+    afterEach(async () => {
         if (userId == null) return;
         await pool.query('DELETE FROM fuelquote WHERE userid = $1', [userId]);
     });
@@ -65,7 +65,7 @@ describe("quote service tests", () => {
         expect(res.rows.length).toBeGreaterThan(0);
     });
 
-    test("quote history", () => {
+    test("quote history", async () => {
         const userId = "abc";
         const data1 = {
             gallonsRequested: 5,
@@ -77,9 +77,9 @@ describe("quote service tests", () => {
             deliveryDate: "2022-04-13"
         };
         const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-        QuoteService.insert(userId, data1, profile);
-        QuoteService.insert(userId, data2, profile);
-        const history = QuoteService.getHistory(userId);
+        await QuoteService.insert(userId, data1, profile);
+        await QuoteService.insert(userId, data2, profile);
+        const history = await QuoteService.getHistory(userId);
         expect(history).toEqual(quotes.get(userId));
     })
 })
