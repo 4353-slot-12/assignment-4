@@ -35,8 +35,8 @@ To prepare you database, please run the following query:
 DROP TABLE IF EXISTS "session";
 DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "userprofiles";
+DROP TABLE IF EXISTS "FuelQuote";
 
--- Set up stored sessions.
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
   "sess" json NOT NULL,
@@ -64,6 +64,15 @@ CREATE TABLE "userprofiles" (
     "state" VARCHAR(2),
     "zip" VARCHAR(5)
 );
+
+CREATE TABLE "FuelQuote" (
+    "timeStamp" DATE,
+    "gallonsRequested" INT,
+    "deliveryAddress" VARCHAR(255),
+    "deliveryDate" DATE,
+    "suggestedPrice" FLOAT,
+    "totalPrice" FLOAT
+);
 ```
 
 ### Step 4: Ensure that the `.env` file is present.
@@ -74,7 +83,7 @@ Below is an example of a compatible `.env` file.
 ```
 PORT=5000
 SESSION_SECRET='28a1ab4e1a6bb3b102b8adc3af539ebf'
-CONNECTION_STRING='postgres://postgres:480a5477d3243abb9ba487fd771b78f1@localhost:5432/quoteapp'
+CONNECTION_STRING='postgres://postgres:postgres@localhost:5432/quoteapp'
 ```
 
 - The `PORT` will default to `8080` if not set.

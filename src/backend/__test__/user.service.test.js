@@ -31,7 +31,7 @@ describe('verify password tests', () => {
 
         const result = UserService.verifyPassword(user, 'keyboardCat');
         expect(result).toBe(true);
-    })
+    });
 
     test('failure', () => {
         const salt = UserService.generateSalt();
@@ -53,6 +53,7 @@ describe("async tests", () => {
 
     beforeAll(async () => {
         client = await pool.connect();
+        await client.query("DELETE FROM users WHERE username = $1", ["bob"]);
     });
 
     beforeEach(async () => {
