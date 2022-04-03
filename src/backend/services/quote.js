@@ -34,7 +34,7 @@ export default class QuoteService {
         // else quotes.set(userId, [quote]); 
 
         await insertQuote(userId, quote, profile)
-        //return quote;
+        return quote;
     }
 
     static async getHistory(userId) {
