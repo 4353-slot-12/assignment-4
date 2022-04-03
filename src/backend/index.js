@@ -1,5 +1,5 @@
 import app from './app.js'
-import pool from './db.js';
+import database from './db.js';
 
 const port = process.env.PORT || 8080;
 
@@ -9,9 +9,11 @@ const server = app.listen(port, () => {
 
 
 const gracefulExit = () => {
-  pool.end();
+  database.end();
   server.close()
 }
 
+process.on('SIGINT', gracefulExit);
+process.on('SIGQUIT', gracefulExit);
 process.on('SIGTERM', gracefulExit);
 process.on('SIGKILL', gracefulExit);
