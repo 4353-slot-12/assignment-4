@@ -101,15 +101,15 @@ describe('controllers', () => {
     })
 
     test('create profile', async() => {
-        ProfileController.create(req, res);
+        await ProfileController.create(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
-        ProfileController.removeProfile(req.user.id);
+        await ProfileController.removeProfile(req.user.id);
     });
 
     test('create invalid profile', () => {
         req.body.name = 'b@b 5@6@t';
-        ProfileController.create(req, res);
+        await ProfileController.create(req, res);
         expect(res.statusCode).toBe(428);
         expect(res.sent).toEqual({ message: "Invalid name field."});
         expect(res.redirectUrl).toBeNull();
@@ -117,21 +117,21 @@ describe('controllers', () => {
 
     test('edit profile', async() => {
         const data = { ...req.body, userId: req.user.id };
-        ProfileService.addProfile(data);
+        await ProfileService.addProfile(data);
 
-        ProfileController.edit(req, res);
+        await ProfileController.edit(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
 
-        ProfileController.removeProfile(req.user.id);
+        await ProfileController.removeProfile(req.user.id);
     });
 
     test('edit invalid profile', async() => {
         const data = { ...req.body, userId: req.user.id };
-        ProfileService.addProfile(data);
+        await ProfileService.addProfile(data);
 
         req.body.name = 'b@b 5@6@t';
-        ProfileController.edit(req, res);
+        await ProfileController.edit(req, res);
         expect(res.statusCode).toBe(428);
         expect(res.sent).toEqual({ message: "Invalid name field."});
         expect(res.redirectUrl).toBeNull();
@@ -139,15 +139,15 @@ describe('controllers', () => {
 
     test('get profile', async() => {
         const data = { ...req.body, userId: req.user.id };
-        ProfileService.addProfile(data);
-        ProfileController.get(req, res);
+        awaitProfileService.addProfile(data);
+        await ProfileController.get(req, res);
         expect(res.statusCode).toBe(200);
         expect(res.sent).toEqual({ data })
-        ProfileController.removeProfile(req.user.id);
+        await ProfileController.removeProfile(req.user.id);
     });
 
     test('get profile no exist', async() => {
-        ProfileController.get(req, res);
+        await ProfileController.get(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe("/proto-profile");
         expect(res.sent).toBeNull();
@@ -158,8 +158,8 @@ describe('controllers', () => {
             gallonsRequested: "5",
             deliveryDate: "2022-03-13"
         };
-        ProfileService.addProfile(fakeUser.body);
-        QuoteController.create(req, res);
+        await ProfileService.addProfile(fakeUser.body);
+        await QuoteController.create(req, res);
         expect(res.statusCode).toBe(201);
         expect(res.sent).toHaveProperty("gallonsRequested");
         expect(res.sent).toHaveProperty("deliveryDate");
@@ -175,8 +175,8 @@ describe('controllers', () => {
             gallonsRequested: "5!",
             deliveryDate: "202#@$3"
         };
-        ProfileService.addProfile(fakeUser.body);
-        QuoteController.create(req, res);
+        await ProfileService.addProfile(fakeUser.body);
+        await QuoteController.create(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
     })
@@ -186,8 +186,8 @@ describe('controllers', () => {
             gallonsRequested: 5,
             deliveryDate: "2022-03-13"
         };
-        QuoteService.insert(fakeUser.user.id, data, fakeUser.body);
-        QuoteController.history(req, res);
+        await QuoteService.insert(fakeUser.user.id, data, fakeUser.body);
+        await QuoteController.history(req, res);
         expect(res.statusCode).toBe(200);
         expect(res.sent).toEqual(quotes.get(fakeUser.user.id));
     })

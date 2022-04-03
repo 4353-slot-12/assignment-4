@@ -12,7 +12,7 @@ export default class ProfileController {
             return res.status(428).send({ message: `Invalid ${invalidField} field.`})
     
         await ProfileService.addProfile(profile);
-        return res.redirect('/quote');
+        return res.status(304).redirect('/quote');
     }
     
     
