@@ -35,7 +35,6 @@ export async function createProfileController(req, res) {
 }
 
 export async function editProfileController(req, res) {
-    console.log("put hehe")
     const profile = {
         userId: req.user.id,
         ...req.body,
@@ -45,9 +44,7 @@ export async function editProfileController(req, res) {
     if (invalidField) 
         return res.status(428).send({ message: `Invalid ${invalidField} field.`});
     
-    console.log(profiles);
     ProfileService.updateProfile(profile);
-    console.log(profiles);
 
     return res.redirect('/quote');
 }

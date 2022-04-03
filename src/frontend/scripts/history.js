@@ -53,7 +53,6 @@
 // table.innerHTML = tmpStr;
 
 function populateTable(data) {
-    console.log(data)
     let table = document.getElementById("quote-history-table");
     let tmpStr = '';
     for (const datum of data) {

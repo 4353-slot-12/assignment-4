@@ -2,23 +2,13 @@ import client from "../db.js";
 import QuoteService from '../services/quote.js';
 
 export default async function insertQuote(userId, quote, profile) {
-    console.log(quote);
-    try {
-        // quote = QuoteService.insert(userId, data, profile)
-        await client.query(`INSERT INTO fuelquote VALUES ($1, $2, $3, $4, $5, $6, $7);`, 
-        [userId, quote.timeStamp, quote.gallonsRequested, quote.deliveryAddress, quote.deliveryDate, quote.suggestedPrice, quote.totalPrice]);
-    } catch(err) {
-        console.log("Error when insert quote query -- " + err);
-    }
+    await client.query(`INSERT INTO fuelquote VALUES ($1, $2, $3, $4, $5, $6, $7);`, 
+    [userId, quote.timeStamp, quote.gallonsRequested, quote.deliveryAddress, quote.deliveryDate, quote.suggestedPrice, quote.totalPrice]);
 }
 
 export async function getQuoteHistory(userId) {
-    try {
-        const data = await client.query(`SELECT * FROM FuelQuote WHERE userId = $1`, [userId]);
-        return data.rows;
-    } catch(err) {
-        console.log(err);
-    }
+    const data = await client.query(`SELECT * FROM FuelQuote WHERE userId = $1`, [userId]);
+    return data.rows;
 }
 
 // test("quote insert", () => {
