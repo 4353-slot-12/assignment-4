@@ -9,7 +9,7 @@ const dollarsRegex = /^\$[\d,]+.\d{2}$/;
 describe("quote service tests", () => {
     let userId = null;
 
-    afterEach(async () => {
+    beforeEach(async () => {
         if (userId == null) return;
         await pool.query('DELETE FROM fuelquote WHERE userid = $1', [userId]);
     });
@@ -29,13 +29,13 @@ describe("quote service tests", () => {
     })
 
     test("quote insert", async () => {
-        const userId = "abc";
+        const userID = "abc";
         const data = {
             gallonsRequested: 5,
             deliveryDate: "2022-03-13"
         };
-        const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-        const quote = await QuoteService.insert(userId, data, profile);
+        const profile = new Profile(userID, "a", "b", "c", "d", "e", "f");
+        const quote = await QuoteService.insert(userID, data, profile);
         expect(quote).toHaveProperty("gallonsRequested")
         expect(quote).toHaveProperty("deliveryDate")
         expect(quote).toHaveProperty("deliveryAddress")
@@ -77,9 +77,9 @@ describe("quote service tests", () => {
             deliveryDate: "2022-04-13"
         };
         const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-        await QuoteService.insert(userId, data1, profile);
-        await QuoteService.insert(userId, data2, profile);
+        const quote1 = await QuoteService.insert(userId, data1, profile);
+        const quote2 = await QuoteService.insert(userId, data2, profile);
         const history = await QuoteService.getHistory(userId);
-        expect(history).toEqual(quotes.get(userId));
+        expect(history).toEqual([quote1, quote2]);
     })
 })
