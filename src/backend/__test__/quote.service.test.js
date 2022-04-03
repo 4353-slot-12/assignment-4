@@ -43,7 +43,7 @@ describe("quote service tests", () => {
         expect(quote).toHaveProperty("suggestedPrice")
         expect(quote).toHaveProperty("totalPrice")
         expect(quote.suggestedPrice).toMatch(dollarsRegex);
-        expect(quote.totalPrice).toMatch(dollarsRegex);\
+        expect(quote.totalPrice).toMatch(dollarsRegex);
         userId = quote.userId;
     });
 
