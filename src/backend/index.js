@@ -7,10 +7,9 @@ const server = app.listen(port, () => {
   console.log(`Server listening. Try: http://localhost:${port}`)
 });
 
-
 const gracefulExit = () => {
   database.end();
-  server.close()
+  server.close();
 }
 
 process.on('SIGINT', gracefulExit);
