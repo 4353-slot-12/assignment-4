@@ -3,17 +3,10 @@
 ## Installation & Setup
 
 ### Step 1: Install necessary pre-requisites
-This project requires NodeJS to run the backend. You can find it here:
 
-https://nodejs.org/en/download/
-
-This project requires version control via Git. You can find it here:
-
-https://git-scm.com/downloads
-
-This project requires a Postgres SQL Database. You can find it here:
-
-https://www.postgresql.org/download/
+- **NodeJS** (for API): https://nodejs.org/en/download/
+- **Git** (for Version Control): https://git-scm.com/downloads
+- **Postgres SQL** (for Database): https://www.postgresql.org/download/
 
 ### Step 2: Clone the repository
 Open a terminal or command prompt and navigate to your desired directory (for example, your Desktop). You can use the `cd` command to accomplish this.
