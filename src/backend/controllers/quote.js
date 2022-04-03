@@ -3,7 +3,7 @@ import QuoteService from '../services/quote.js';
 
 export default class QuoteController {
     static async history(req, res) {
-        const data = QuoteService.getHistory(req.user.id)
+        const data = await QuoteService.getHistory(req.user.id)
         res.status(200).send(data);
     }
 
@@ -11,8 +11,8 @@ export default class QuoteController {
         if (QuoteService.invalidData(req.body))
         return res.redirect('/quote');
 
-        const profile = ProfileService.findByUserId(req.user.id);
-        const data = QuoteService.insert(req.user.id, req.body, profile);
+        const profile = await ProfileService.findByUserId(req.user.id);
+        const data = await QuoteService.insert(req.user.id, req.body, profile);
         delete data.userId;
         return res.status(201).send(data);
     }
