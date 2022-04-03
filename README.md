@@ -35,7 +35,7 @@ To prepare your database, please run the following query:
 DROP TABLE IF EXISTS "session";
 DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "userprofiles";
-DROP TABLE IF EXISTS "FuelQuote";
+DROP TABLE IF EXISTS "fuelquote";
 
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
@@ -65,13 +65,14 @@ CREATE TABLE "userprofiles" (
     "zip" VARCHAR(5)
 );
 
-CREATE TABLE "FuelQuote" (
-    "timeStamp" DATE,
-    "gallonsRequested" INT,
+CREATE TABLE "fuelquote" (
+    "userid" VARCHAR(24),
+    "timeStamp" VARCHAR(255),
+    "gallonsRequested" VARCHAR(255),
     "deliveryAddress" VARCHAR(255),
-    "deliveryDate" DATE,
-    "suggestedPrice" FLOAT,
-    "totalPrice" FLOAT
+    "deliveryDate" VARCHAR(255),
+    "suggestedPrice" VARCHAR(255),
+    "totalPrice" VARCHAR(255)
 );
 ```
 
