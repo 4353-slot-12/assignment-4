@@ -32,10 +32,11 @@ CREATE TABLE "userprofiles" (
 );
 
 CREATE TABLE "fuelquote" (
-    "timeStamp" DATE,
-    "gallonsRequested" INT,
+    "userid" VARCHAR(24) FOREIGN KEY,
+    "timeStamp" VARCHAR(255),
+    "gallonsRequested" VARCHAR(255),
     "deliveryAddress" VARCHAR(255),
-    "deliveryDate" DATE,
-    "suggestedPrice" FLOAT,
-    "totalPrice" FLOAT
+    "deliveryDate" VARCHAR(255),
+    "suggestedPrice" VARCHAR(255),
+    "totalPrice" VARCHAR(255)
 );

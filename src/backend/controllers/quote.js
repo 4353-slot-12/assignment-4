@@ -16,7 +16,6 @@ export default class QuoteController {
         const profile = await ProfileService.findByUserId(req.user.id);
         console.log(req.body);
         const data = await QuoteService.insert(req.user.id, req.body, profile);
-        delete data.userId;
         return res.status(201).send(data);
     }
 }

@@ -5,9 +5,10 @@ export default async function insertQuote(userId, quote, profile) {
     console.log(quote);
     try {
         // quote = QuoteService.insert(userId, data, profile)
-        await client.query(`INSERT INTO fuelquote (timeStamp, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice) VALUES ($1, ${quote.gallonsRequested}, '${quote.deliveryAddress}', '${quote.deliveryDate}', ${quote.suggestedPrice}, ${quote.totalPrice});`, [quote.timeStamp]);
+        await client.query(`INSERT INTO fuelquote VALUES ($1, $2, $3, $4, $5, $6, $7);`, 
+        [userId, quote.timeStamp, quote.gallonsRequested, quote.deliveryAddress, quote.deliveryDate, quote.suggestedPrice, quote.totalPrice]);
     } catch(err) {
-        console.log(err);
+        console.log("Error when insert quote query -- " + err);
     }
 }
 
