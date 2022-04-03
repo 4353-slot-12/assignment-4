@@ -1,12 +1,11 @@
 import client from "../db.js";
 import QuoteService from '../services/quote.js';
 
-export default async function insertQuote(userId, data, profile) {
+export default async function insertQuote(userId, quote, profile) {
+    console.log(quote);
     try {
-        quote = QuoteService.insert(userId, data, profile)
-        await client.connect();
-        await client.query(`INSERT INTO FuelQuote (timeStamp, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice) VALUES (${quote.timeStamp}, ${quote.gallonsRequested}, ${quote.deliveryAddress}, ${quote.deliveryDate}, ${quote.suggestedPrice}, ${quote.totalPrice});`);
-        await client.end();
+        // quote = QuoteService.insert(userId, data, profile)
+        await client.query(`INSERT INTO fuelquote (timeStamp, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice) VALUES ($1, ${quote.gallonsRequested}, '${quote.deliveryAddress}', '${quote.deliveryDate}', ${quote.suggestedPrice}, ${quote.totalPrice});`, [quote.timeStamp]);
     } catch(err) {
         console.log(err);
     }
@@ -14,9 +13,7 @@ export default async function insertQuote(userId, data, profile) {
 
 export async function getQuoteHistory() {
     try {
-        await client.connect();
         const data = await client.query(`SELECT * FROM FuelQuote`);
-        await client.end();
         return data;
     } catch(err) {
         console.log(err);

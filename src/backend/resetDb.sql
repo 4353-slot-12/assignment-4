@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS "session";
 DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "userprofiles";
-DROP TABLE IF EXISTS "FuelQuote";
+DROP TABLE IF EXISTS "fuelquote";
 
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
@@ -31,7 +31,7 @@ CREATE TABLE "userprofiles" (
     "zip" VARCHAR(5)
 );
 
-CREATE TABLE "FuelQuote" (
+CREATE TABLE "fuelquote" (
     "timeStamp" DATE,
     "gallonsRequested" INT,
     "deliveryAddress" VARCHAR(255),

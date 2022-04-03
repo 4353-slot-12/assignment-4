@@ -8,10 +8,13 @@ export default class QuoteController {
     }
 
     static async create(req, res) {
-        if (QuoteService.invalidData(req.body))
-        return res.redirect('/quote');
+        if (QuoteService.invalidData(req.body)) {
+            console.log("invalid data");
+            return res.redirect('/quote');
+        }
 
         const profile = await ProfileService.findByUserId(req.user.id);
+        console.log(req.body);
         const data = await QuoteService.insert(req.user.id, req.body, profile);
         delete data.userId;
         return res.status(201).send(data);
