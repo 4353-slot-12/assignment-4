@@ -24,6 +24,7 @@ export default class QuoteService {
 
         data.gallonsRequested = parseInt(data.gallonsRequested);
         const quote = { 
+            userId,
             deliveryAddress: profile?.fullAddress,
             suggestedPrice: formatter.format(suggestedPrice),
             totalPrice: formatter.format(data.gallonsRequested * suggestedPrice),

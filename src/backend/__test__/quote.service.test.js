@@ -1,12 +1,18 @@
 import { beforeEach, expect, test, describe } from "@jest/globals";
 import QuoteService, { quotes } from '../services/quote.js';
 import { Profile } from '../services/profile.js';
+import pool from '../db.js';
 
 const dollarsRegex = /^\$[\d,]+.\d{2}$/;
 
 
 describe("quote service tests", () => {
-    beforeEach(() => quotes.clear());
+    let userId = null;
+
+    beforeEach(async () => {
+        if (userId == null) return;
+        await pool.query('DELETE FROM fuelquote WHERE userid = $1', [userId]);
+    });
 
     test("data validation", () => {
         const validData = {
@@ -19,16 +25,17 @@ describe("quote service tests", () => {
         };
         expect(QuoteService.invalidData(validData)).toBe(false);
         expect(QuoteService.invalidData(invalidDate)).toBe(true);
+        userId = null;
     })
 
-    test("quote insert", () => {
+    test("quote insert", async () => {
         const userId = "abc";
         const data = {
             gallonsRequested: 5,
             deliveryDate: "2022-03-13"
         };
         const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-        const quote = QuoteService.insert(userId, data, profile);
+        const quote = await QuoteService.insert(userId, data, profile);
         expect(quote).toHaveProperty("gallonsRequested")
         expect(quote).toHaveProperty("deliveryDate")
         expect(quote).toHaveProperty("deliveryAddress")
@@ -36,10 +43,11 @@ describe("quote service tests", () => {
         expect(quote).toHaveProperty("suggestedPrice")
         expect(quote).toHaveProperty("totalPrice")
         expect(quote.suggestedPrice).toMatch(dollarsRegex);
-        expect(quote.totalPrice).toMatch(dollarsRegex);
+        expect(quote.totalPrice).toMatch(dollarsRegex);\
+        userId = quote.userId;
     });
 
-    test("quote insert many", () => {
+    test("quote insert many", async () => {
         const userId = "abc";
         const data1 = {
             gallonsRequested: 5,
@@ -51,10 +59,10 @@ describe("quote service tests", () => {
             deliveryDate: "2022-04-13"
         };
         const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-        QuoteService.insert(userId, data1, profile);
-        QuoteService.insert(userId, data2, profile);
-        expect(quotes.has(userId)).toBe(true);
-        expect(quotes.get(userId).length).toBe(2);
+        await QuoteService.insert(userId, data1, profile);
+        await QuoteService.insert(userId, data2, profile);
+        const res = await pool.query('SELECT * FROM fuelquote WHERE userid = $1', [userId]);
+        expect(res.rows.length).toBeGreaterThan(0);
     });
 
     test("quote history", () => {
