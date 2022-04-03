@@ -75,10 +75,15 @@ This project will not run unless the necessary environment variables are set. Th
 Below is an example of a `.env` file.
 
 ```
-PORT=8080
-SESSION_SECRET='keyboardCat'
-CONNECTION_STRING='postgres://{user}:{password}@{hostname}:{port}/{database-name}'
+PORT=5000
+SESSION_SECRET='28a1ab4e1a6bb3b102b8adc3af539ebf'
+CONNECTION_STRING='postgres://username:480a5477d3243abb9ba487fd771b78f1@localhost:5432/quoteapp'
 ```
+
+- The `PORT` will default to `8080` if not set.
+- The `SESSION_SECRET` will default to `keyboardCat` if not set. (Not secure!)
+- The app will crash if `CONNECTION_STRING` is not set.
+- The connection string format is usually `postgres://{user}:{password}@{hostname}:{port}/{database-name}`
 
 ### Step 5: Install dependencies
 Node dependencies need to be installed before we can run the backend for the website. We can install those by navigating to the root directory of the project and running the following command:
@@ -94,4 +99,7 @@ At this point, we can check if we did everything correctly by starting the serve
 npm run start
 ```
 
+### Step 7: Run the application.
 Finally, open your Google Chrome or Firefox and visit `http://localhost:8080`. You should see that the website loaded cleanly. Make sure to check the developer console to see if you're getting any errors.
+
+NOTE: If your port number is different, please use that instead. For example, for port `5000`, visit `http://localhost:5000`.
