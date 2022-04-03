@@ -104,15 +104,16 @@ describe('controllers', () => {
         await ProfileController.create(req, res);
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
-        await ProfileController.removeProfile(req.user.id);
+        await ProfileService.removeProfile(req.user.id);
     });
 
-    test('create invalid profile', () => {
+    test('create invalid profile', async() => {
         req.body.name = 'b@b 5@6@t';
         await ProfileController.create(req, res);
         expect(res.statusCode).toBe(428);
         expect(res.sent).toEqual({ message: "Invalid name field."});
         expect(res.redirectUrl).toBeNull();
+        await ProfileService.removeProfile(req.user.id);
     });
 
     test('edit profile', async() => {
@@ -123,7 +124,7 @@ describe('controllers', () => {
         expect(res.statusCode).toBe(304);
         expect(res.redirectUrl).toBe('/quote');
 
-        await ProfileController.removeProfile(req.user.id);
+        await ProfileService.removeProfile(req.user.id);
     });
 
     test('edit invalid profile', async() => {
@@ -135,15 +136,17 @@ describe('controllers', () => {
         expect(res.statusCode).toBe(428);
         expect(res.sent).toEqual({ message: "Invalid name field."});
         expect(res.redirectUrl).toBeNull();
+
+        await ProfileService.removeProfile(req.user.id);
     });
 
     test('get profile', async() => {
         const data = { ...req.body, userId: req.user.id };
-        awaitProfileService.addProfile(data);
+        await ProfileService.addProfile(data);
         await ProfileController.get(req, res);
         expect(res.statusCode).toBe(200);
         expect(res.sent).toEqual({ data })
-        await ProfileController.removeProfile(req.user.id);
+        await ProfileService.removeProfile(req.user.id);
     });
 
     test('get profile no exist', async() => {
@@ -153,7 +156,7 @@ describe('controllers', () => {
         expect(res.sent).toBeNull();
     });
 
-    test('quote create', () => {
+    test('quote create', async() => {
         req.body = {
             gallonsRequested: "5",
             deliveryDate: "2022-03-13"
@@ -170,7 +173,7 @@ describe('controllers', () => {
         expect(res.sent).not.toHaveProperty("userId");
     })
 
-    test('quote create invalid', () => {
+    test('quote create invalid', async() => {
         req.body = {
             gallonsRequested: "5!",
             deliveryDate: "202#@$3"
@@ -181,7 +184,7 @@ describe('controllers', () => {
         expect(res.redirectUrl).toBe('/quote');
     })
 
-    test('quote history', () => {
+    test('quote history', async() => {
         const data = {
             gallonsRequested: 5,
             deliveryDate: "2022-03-13"
