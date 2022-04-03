@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "session";
+DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "userprofiles";
 
 CREATE TABLE "session" (
@@ -21,14 +21,11 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "userprofiles" (
-    "userId" VARCHAR(24) PRIMARY KEY,
+    "userid" VARCHAR(24) PRIMARY KEY,
     "name" VARCHAR(100),
     "address1" VARCHAR(100),
     "address2" VARCHAR(100),
     "city" VARCHAR(100),
     "state" VARCHAR(2),
     "zip" VARCHAR(5)
-)
-
-
-
+);

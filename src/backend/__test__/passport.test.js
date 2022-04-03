@@ -9,7 +9,7 @@ function done(err, user) {
     params.user = user;
 }
 
-describe("passport.js", async () => {
+describe("passport.js", () => {
     beforeEach(() => {
         users.length = 0;
         params = {};
@@ -23,14 +23,14 @@ describe("passport.js", async () => {
 
     test("verifyCallback password verify failed", async () => {
         await UserService.insertUser("username", "correctPass")
-        verifyCallback("username", "wrongPass", done);
+        await verifyCallback("username", "wrongPass", done);
         expect(params.err).toBeNull();
         expect(params.user).toBe(false);
     });
 
     test("verifyCallback success", async () => {
         await UserService.insertUser("username", "correctPass")
-        verifyCallback("username", "correctPass", done);
+        await verifyCallback("username", "correctPass", done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0]);
     });
@@ -44,14 +44,14 @@ describe("passport.js", async () => {
 
     test("deserializeUser success", async () => {
         await UserService.insertUser("username", "correctPass")
-        deserializeUser(users[0].id, done);
+        await deserializeUser(users[0].id, done);
         expect(params.err).toBeNull();
         expect(params.user).toEqual(users[0]);
     });
 
-    test("deserializeUser failure", () => {
+    test("deserializeUser failure", async () => {
         const fakeId = UserService.generateUserId();
-        deserializeUser(fakeId, done);
+        await deserializeUser(fakeId, done);
         expect(params.err).toBe("User not found");
         expect(params.user).toBe(undefined);
     });

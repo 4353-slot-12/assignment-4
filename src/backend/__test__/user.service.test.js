@@ -1,4 +1,5 @@
-import UserService, { users } from '../services/user.js';
+import UserService from '../services/user.js';
+import pool from '../db.js';
 
 test('salt generates correctly', () => {
     const salt = UserService.generateSalt();
@@ -46,43 +47,60 @@ describe('verify password tests', () => {
     })
 });
 
-test("insert user test", async () => {
-    await UserService.insertUser("bob", "keyboardCat");
+describe("async tests", () => {
+    let client;
+    let userId = null;
 
-    // TODO: Fix test.
-    expect(users).toEqual(
-        expect.arrayContaining([
-            expect.objectContaining({ username: 'bob' }),
-        ])
-    )
-})
+    beforeAll(async () => {
+        client = await pool.connect();
+    });
 
-
-describe("find user by username", () => {
-    beforeEach(() => {
-        // Clears users array.
-        users.length = 0;
+    beforeEach(async () => {
+        if (userId === null) return;
+        await client.query("DELETE FROM users WHERE id = $1", [userId]);
     })
 
-    test("by username, success", async () => {
-        UserService.insertUser("bob", "keyboardCat");
-        const user = await UserService.findByUsername("bob");
-        expect(user).toMatchObject({ username: "bob" });
+    afterAll(async () => {
+        if (userId !== null)
+            await client.query("DELETE FROM users WHERE id = $1", [userId]);
+        await client.release();
     })
 
-    test("by username, failure", async () => {
-        const user = await UserService.findByUsername("doesNotExist");
-        expect(user).toBe(undefined);
+    test("insert user test", async () => {
+        const expectedUser = await UserService.insertUser("bob", "keyboardCat");
+        const insertedUser = await UserService.findById(expectedUser.id);
+        expect(insertedUser).toEqual(expectedUser);
+        userId = insertedUser.id;
     })
-
-    test("by id, success", async () => {
-        UserService.insertUser("bob", "keyboardCat");
-        const user = await UserService.findById(users[0].id);
-        expect(user).toMatchObject({ username: "bob" });
-    })
-
-    test("by id, failure", async () => {
-        const user = await UserService.findById("doesNotExist");
-        expect(user).toBe(undefined);
+    
+    
+    describe("find user by username", () => {
+        test("by username, success", async () => {
+            const insertedUser = await UserService.insertUser("bob", "keyboardCat");
+            const foundUser = await UserService.findByUsername("bob");
+            expect(foundUser.id).toBe(insertedUser.id);
+            userId = insertedUser.id;
+        })
+    
+        test("by username, failure", async () => {
+            const user = await UserService.findByUsername("doesNotExist");
+            expect(user).toBe(undefined);
+            if (user?.id) userId = user.id;
+            else userId = null;
+        })
+    
+        test("by id, success", async () => {
+            const insertedUser = await UserService.insertUser("bob", "keyboardCat");
+            const foundUser = await UserService.findById(insertedUser.id);
+            expect(foundUser.id).toBe(insertedUser.id);
+            userId = insertedUser.id;
+        })
+    
+        test("by id, failure", async () => {
+            const user = await UserService.findById("doesNotExist");
+            expect(user).toBe(undefined);
+            if (user?.id) userId = user.id;
+            else userId = null;
+        })
     })
 })
