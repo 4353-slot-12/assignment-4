@@ -2,7 +2,7 @@ import client from "../db.js";
 import { Profile } from "../services/profile.js";
 
 export default async function select_profile(userId){
-    const res = await client.query('SELECT * FROM userprofiles WHERE userId = $1', [userId]);
+    const res = await client.query('SELECT * FROM userprofiles WHERE userid = $1', [userId]);
     if(res.rows[0] === undefined) 
         return undefined;
     return new Profile(res.rows[0].userid, res.rows[0].name, res.rows[0].address1, res.rows[0].address2, 
