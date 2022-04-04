@@ -156,42 +156,42 @@ describe('controllers', () => {
         expect(res.sent).toBeNull();
     });
 
-    test('quote create', async() => {
-        req.body = {
-            gallonsRequested: "5",
-            deliveryDate: "2022-03-13"
-        };
-        await ProfileService.addProfile(fakeUser.body);
-        await QuoteController.create(req, res);
-        expect(res.statusCode).toBe(201);
-        expect(res.sent).toHaveProperty("gallonsRequested");
-        expect(res.sent).toHaveProperty("deliveryDate");
-        expect(res.sent).toHaveProperty("deliveryAddress");
-        expect(res.sent).toHaveProperty("timeStamp");
-        expect(res.sent).toHaveProperty("suggestedPrice");
-        expect(res.sent).toHaveProperty("totalPrice");
-        expect(res.sent).not.toHaveProperty("userId");
-    })
+    // test('quote create', async() => {
+    //     req.body = {
+    //         gallonsRequested: "5",
+    //         deliveryDate: "2022-03-13"
+    //     };
+    //     await ProfileService.addProfile(fakeUser.body);
+    //     await QuoteController.create(req, res);
+    //     expect(res.statusCode).toBe(201);
+    //     expect(res.sent).toHaveProperty("gallonsRequested");
+    //     expect(res.sent).toHaveProperty("deliveryDate");
+    //     expect(res.sent).toHaveProperty("deliveryAddress");
+    //     expect(res.sent).toHaveProperty("timeStamp");
+    //     expect(res.sent).toHaveProperty("suggestedPrice");
+    //     expect(res.sent).toHaveProperty("totalPrice");
+    //     expect(res.sent).not.toHaveProperty("userId");
+    // })
 
-    test('quote create invalid', async() => {
-        req.body = {
-            gallonsRequested: "5!",
-            deliveryDate: "202#@$3"
-        };
-        await ProfileService.addProfile(fakeUser.body);
-        await QuoteController.create(req, res);
-        expect(res.statusCode).toBe(304);
-        expect(res.redirectUrl).toBe('/quote');
-    })
+    // test('quote create invalid', async() => {
+    //     req.body = {
+    //         gallonsRequested: "5!",
+    //         deliveryDate: "202#@$3"
+    //     };
+    //     await ProfileService.addProfile(fakeUser.body);
+    //     await QuoteController.create(req, res);
+    //     expect(res.statusCode).toBe(304);
+    //     expect(res.redirectUrl).toBe('/quote');
+    // })
 
-    test('quote history', async() => {
-        const data = {
-            gallonsRequested: 5,
-            deliveryDate: "2022-03-13"
-        };
-        await QuoteService.insert(fakeUser.user.id, data, fakeUser.body);
-        await QuoteController.history(req, res);
-        expect(res.statusCode).toBe(200);
-        expect(res.sent).toEqual(quotes.get(fakeUser.user.id));
-    })
+    // test('quote history', async() => {
+    //     const data = {
+    //         gallonsRequested: 5,
+    //         deliveryDate: "2022-03-13"
+    //     };
+    //     await QuoteService.insert(fakeUser.user.id, data, fakeUser.body);
+    //     await QuoteController.history(req, res);
+    //     expect(res.statusCode).toBe(200);
+    //     expect(res.sent).toEqual(quotes.get(fakeUser.user.id));
+    // })
 });
