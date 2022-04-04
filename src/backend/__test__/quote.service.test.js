@@ -50,12 +50,12 @@ describe("quote service tests", () => {
     test("quote insert many", async () => {
         const userId = "abc";
         const data1 = {
-            gallonsRequested: 5,
+            gallonsRequested: "5",
             deliveryDate: "2022-03-13"
         };
 
         const data2 = {
-            gallonsRequested: 15,
+            gallonsRequested: "15",
             deliveryDate: "2022-04-13"
         };
         const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
@@ -66,20 +66,20 @@ describe("quote service tests", () => {
     });
 
     test("quote history", async () => {
-        const userId = "abc";
+        const userid = "abc";
         const data1 = {
-            gallonsRequested: 5,
+            gallonsRequested: "5",
             deliveryDate: "2022-03-13"
         };
 
         const data2 = {
-            gallonsRequested: 15,
+            gallonsRequested: "15",
             deliveryDate: "2022-04-13"
         };
-        const profile = new Profile(userId, "a", "b", "c", "d", "e", "f");
-        const quote1 = await QuoteService.insert(userId, data1, profile);
-        const quote2 = await QuoteService.insert(userId, data2, profile);
-        const history = await QuoteService.getHistory(userId);
+        const profile = new Profile(userid, "a", "b", "c", "d", "e", "f");
+        const quote1 = await QuoteService.insert(userid, data1, profile);
+        const quote2 = await QuoteService.insert(userid, data2, profile);
+        const history = await QuoteService.getHistory(userid);
         expect(history).toEqual([quote1, quote2]);
     })
 })

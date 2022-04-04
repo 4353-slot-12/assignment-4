@@ -7,7 +7,7 @@ export default async function insertQuote(userId, quote, profile) {
 }
 
 export async function getQuoteHistory(userId) {
-    const data = await client.query(`SELECT * FROM FuelQuote WHERE userId = $1`, [userId]);
+    const data = await client.query(`SELECT * FROM FuelQuote WHERE userid = $1`, [userId]);
     return data.rows;
 }
 
