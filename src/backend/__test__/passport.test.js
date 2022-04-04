@@ -12,6 +12,11 @@ function done(err, user) {
 
 describe("passport.js", () => {
     let userId = null;
+
+    beforeAll(async () => {
+        await pool.query("DELETE FROM users WHERE username = 'username';");
+    });
+    
     beforeEach(async () => {
         params = {};
         if (userId == null) return;
