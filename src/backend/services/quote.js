@@ -40,6 +40,24 @@ export default class QuoteService {
         return quote;
     }
 
+    static async check(userId, data, profile) {
+
+        data.gallonsRequested = parseInt(data.gallonsRequested);
+        const suggestedPrice = await PricingService.calculateTotalPrice(profile, data.gallonsRequested);
+        const quote = { 
+            userId,
+            deliveryAddress: profile?.fullAddress,
+            suggestedPrice: formatter.format(suggestedPrice),
+            totalPrice: formatter.format(data.gallonsRequested * suggestedPrice),
+            timeStamp: generateTimestamp(),
+            ...data,
+        };
+        // if (quotes.has(userId)) quotes.get(userId).push(quote);
+        // else quotes.set(userId, [quote]); 
+
+        return quote;
+    }
+
     static async getHistory(userId) {
         return await getQuoteHistory(userId)
     }
