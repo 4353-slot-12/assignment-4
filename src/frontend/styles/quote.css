@@ -21,3 +21,19 @@ section {
 .animate {
     animation: bounce 1s linear;
 }
+
+button {
+    width: 100%;
+    max-width: 100%;
+    background-color: var(--darkest);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--dark);
+}

@@ -18,6 +18,8 @@ router.post('/profile', isAuth, ProfileController.create);
 router.put('/profile', isAuth, ProfileController.edit)
 router.get('/profile', isAuth, ProfileController.get);
 router.post('/quote', isAuth, QuoteController.create);
-router.get('/quote', isAuth, QuoteController.history);
+router.get('/history', isAuth, QuoteController.history);
+router.get('/quote', isAuth, QuoteController.create);
+
 
 export default router;

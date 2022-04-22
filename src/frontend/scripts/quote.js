@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
     datePicker.value = stringDate;
     datePicker.min = stringDate;
 
-    
     // Runs on load to populate the address field.
     fetch('http://localhost:8080/api/profile', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -52,6 +51,8 @@ function populateResultFields(data) {
     unitPriceElement.classList.add('animate');
     totalPriceElement.classList.add('animate');
 
+    // enable the submit button
+
     setTimeout(() => {
         unitPriceElement.classList.remove('animate');
         totalPriceElement.classList.remove('animate');
@@ -85,3 +86,6 @@ function handleSubmit(event) {
     event.preventDefault();
     sendFormData();
 }
+
+
+
