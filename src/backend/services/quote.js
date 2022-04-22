@@ -1,4 +1,5 @@
 import insertQuote, {getQuoteHistory} from "../models/quote.js"
+import PricingService from "./pricing.js";
 export const quotes = new Map();
 
 const numberRegex = /^\d+$/;
@@ -23,6 +24,7 @@ export default class QuoteService {
     static async insert(userId, data, profile) {
 
         data.gallonsRequested = parseInt(data.gallonsRequested);
+        const suggestedPrice = await PricingService.calculateTotalPrice(profile);
         const quote = { 
             userId,
             deliveryAddress: profile?.fullAddress,

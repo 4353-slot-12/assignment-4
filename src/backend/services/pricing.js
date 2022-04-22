@@ -23,16 +23,16 @@ export default class PricingService {
         return 0.1;
     }
 
-    static async calculateMargin(profile) {
+    static async calculateMargin(profile, gallonsRequested) {
         const locationFactor = PricingService.getLocationFactor(profile);
         const rateHistoryFactor = await PricingService.getRateHistoryFactor(profile.userId);
-        const gallonsRequestedFactor = PricingService.getGallonsRequestedFactor(profile.gallonsRequested);
+        const gallonsRequestedFactor = PricingService.getGallonsRequestedFactor(gallonsRequested);
         const companyProfitFactor = PricingService.getCompanyProfitFactor();
         return currentPrice * (locationFactor + rateHistoryFactor + gallonsRequestedFactor + companyProfitFactor);
     }
 
     static async calculateTotalPrice(profile) {
-        const margin = await PricingService.calculateMargin(profile);
+        const margin = await PricingService.calculateMargin(profile, gallonsRequested);
         return currentPrice + margin;
     }
 }
