@@ -18,10 +18,6 @@ export default class QuoteController {
     }
 
     static async get(req, res) {
-        if (QuoteService.invalidData(req.body)) {
-            return res.redirect('/quote');
-        }
-
         const profile = await ProfileService.findByUserId(req.user.id);
         const data = await QuoteService.check(req.user.id, req.body, profile);
         return res.status(201).send(data);

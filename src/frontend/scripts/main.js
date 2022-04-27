@@ -21,7 +21,7 @@ function switchToAuthenticatedNavBar(isAuth) {
     if (authNavBar) authNavBar.style.display = "block";
 }
 
-fetch('http://localhost:8080api/auth', {
+fetch('http://localhost:8080/api/auth', {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', 
     cache: 'no-cache', 

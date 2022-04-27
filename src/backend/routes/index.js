@@ -19,7 +19,7 @@ router.put('/profile', isAuth, ProfileController.edit)
 router.get('/profile', isAuth, ProfileController.get);
 router.post('/quote', isAuth, QuoteController.create);
 router.get('/history', isAuth, QuoteController.history);
-router.get('/quote', isAuth, QuoteController.create);
+router.get('/quote', isAuth, QuoteController.get);
 
 
 export default router;

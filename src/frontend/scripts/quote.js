@@ -51,7 +51,7 @@ function populateResultFields(data) {
     unitPriceElement.classList.add('animate');
     totalPriceElement.classList.add('animate');
 
-    // enable the submit button
+    document.getElementById("quote-send-btn").setAttribute("disabled", false);
 
     setTimeout(() => {
         unitPriceElement.classList.remove('animate');
@@ -59,7 +59,26 @@ function populateResultFields(data) {
     }, 1000);
 }
 
+// Fire when the Get Quote button is pressed.
 function sendFormData() {
+    fetch('http://localhost:8080/api/quote', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        redirect: 'follow', 
+        referrerPolicy: 'no-referrer', 
+    })
+        .then(response => response.json())
+        .then(data => populateResultFields(data))
+        .catch(err => console.error(err));
+}
+
+// Fire when the Submit Quote button is pressed.
+function submitQuote() {
     const payload = JSON.stringify({
         deliveryDate: document.getElementById('delivery-date').value,
         gallonsRequested: document.getElementById('gallons-requested').value,
