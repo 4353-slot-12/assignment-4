@@ -1,3 +1,5 @@
+let getQuotePressed = false
+
 document.addEventListener("DOMContentLoaded", function() {
     // Limits date selection to today or after.
     const todaysDateUTC = new Date();
@@ -28,8 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(err => console.error(err));
     
     const form = document.getElementById("quote-form");
-    form.addEventListener("submit", handleSubmitPOST);
-    form.addEventListener("button", handleSubmitGET);
+    form.addEventListener("submit", handleSubmit);
 });
 
 function populateFields(profile){
@@ -110,12 +111,20 @@ function sendFormDataPOST() {
         .catch(err => console.error(err));
 }
 
-function handleSubmitGET(event) {
+function handleSubmit(event) {
     event.preventDefault();
-    sendFormDataGET();
+    if (getQuotePressed) {
+        sendFormDataGET();
+    }
+    else {
+        sendFormDataPOST();
+    }
 }
 
-function handleSubmitPOST(event) {
-    event.preventDefault();
-    sendFormDataPOST();
+function handleButtons() {
+    getQuotePressed = true
+}
+
+function handleButtonsSubmit() {
+    getQuotePressed = false
 }
