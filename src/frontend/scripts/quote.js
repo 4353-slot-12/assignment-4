@@ -59,11 +59,38 @@ function populateResultFields(data) {
     }, 1000);
 }
 
-function sendFormData() {
+function sendFormDataGET() {
     const payload = JSON.stringify({
         deliveryDate: document.getElementById('delivery-date').value,
         gallonsRequested: document.getElementById('gallons-requested').value,
     })
+
+    document.getElementById("GetQuote").value = "Johnny Bravo"; 
+
+    fetch('http://localhost:8080/api/quote', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        referrerPolicy: 'no-referrer', 
+        body: payload,
+    })
+        .then(response => response.json())
+        .then(data => populateResultFields(data))
+        .catch(err => console.error(err));
+}
+
+function sendFormDataPOST() {
+    const payload = JSON.stringify({
+        deliveryDate: document.getElementById('delivery-date').value,
+        gallonsRequested: document.getElementById('gallons-requested').value,
+    })
+
+    document.getElementById("GetQuote").value = "Johnny Bravo"; 
 
     fetch('http://localhost:8080/api/quote', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -82,10 +109,12 @@ function sendFormData() {
         .catch(err => console.error(err));
 }
 
-function handleSubmit(event) {
+function handleSubmitGET(event) {
     event.preventDefault();
-    sendFormData();
+    sendFormDataGET();
 }
 
-
-
+function handleSubmitPOST(event) {
+    event.preventDefault();
+    sendFormDataPOST();
+}
