@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(err => console.error(err));
     
     const form = document.getElementById("quote-form");
-    form.addEventListener("submit", handleSubmit);
+    form.addEventListener("submit", handleSubmitPOST);
+    form.addEventListener("button", handleSubmitGET);
 });
 
 function populateFields(profile){
