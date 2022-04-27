@@ -1,5 +1,5 @@
 import { beforeEach, expect, test, describe } from "@jest/globals";
-import QuoteService, { quotes } from '../services/quote.js';
+import QuoteService from '../services/quote.js';
 import { Profile } from '../services/profile.js';
 import pool from '../db.js';
 

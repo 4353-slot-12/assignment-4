@@ -1,6 +1,5 @@
 import insertQuote, {getQuoteHistory} from "../models/quote.js"
 import PricingService from "./pricing.js";
-export const quotes = new Map();
 
 const numberRegex = /^\d+$/;
 const dateRegex = /^\d{4}-\d{2}-\d{2}$/
@@ -52,8 +51,6 @@ export default class QuoteService {
             timeStamp: generateTimestamp(),
             ...data,
         };
-        // if (quotes.has(userId)) quotes.get(userId).push(quote);
-        // else quotes.set(userId, [quote]); 
 
         return quote;
     }

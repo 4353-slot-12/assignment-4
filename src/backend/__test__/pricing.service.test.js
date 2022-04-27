@@ -1,17 +1,17 @@
 import { beforeEach, expect, test, describe } from "@jest/globals";
-import QuoteService, { quotes } from '../services/quote.js';
+import QuoteService from '../services/quote.js';
 import { Profile } from '../services/profile.js';
 import PricingService from '../services/pricing.js';
 import pool from '../db.js';
 
 
 test("location factor, from TX", () => {
-    const profile = new Profile("abc", "a", "b", "c", "d", "e", "f", "TX");
-    expect(PricingService.getLocationFactor(profile)).toBe(0.2);
+    const profile = new Profile("abc", "a", "b", "c", "d", "TX", "f");
+    expect(PricingService.getLocationFactor(profile)).toBe(0.02);
 })
 
-test("location factor, from TX", () => {
-    const profile = new Profile("abc", "a", "b", "c", "d", "e", "f", "CA");
+test("location factor, from CA", () => {
+    const profile = new Profile("abc", "a", "b", "c", "d", "CA", "f");
     expect(PricingService.getLocationFactor(profile)).toBe(0.04);
 })
 
@@ -26,7 +26,7 @@ test("gallons requested factor, = 1000", () => {
 })
 
 test("gallons requested factor, > 1000", () => {
-    const gallonsRequested = 500;
+    const gallonsRequested = 5000;
     expect(PricingService.getGallonsRequestedFactor(gallonsRequested)).toBe(0.02);
 })
 
