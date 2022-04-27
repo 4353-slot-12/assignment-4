@@ -1,3 +1,5 @@
+let getQuotePressed = false
+
 document.addEventListener("DOMContentLoaded", function() {
     // Limits date selection to today or after.
     const todaysDateUTC = new Date();
@@ -84,8 +86,10 @@ function submitQuote() {
         gallonsRequested: document.getElementById('gallons-requested').value,
     })
 
+    document.getElementById("GetQuote").value = "Johnny Bravo"; 
+
     fetch('http://localhost:8080/api/quote', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', 
         cache: 'no-cache', 
         credentials: 'same-origin', 
@@ -100,11 +104,3 @@ function submitQuote() {
         .then(data => populateResultFields(data))
         .catch(err => console.error(err));
 }
-
-function handleSubmit(event) {
-    event.preventDefault();
-    sendFormData();
-}
-
-
-

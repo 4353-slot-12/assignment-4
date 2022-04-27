@@ -1,3 +1,4 @@
+import QuoteService from "../services/quote.js";
 const currentPrice = 1.50;
 
 
@@ -8,7 +9,7 @@ export default class PricingService {
     }
 
     static async getRateHistoryFactor(userId) {
-        const history = await getQuoteHistory(userId);
+        const history = await QuoteService.getHistory(userId);
         if (history.length) return 0.01;
         return 0;
     }
@@ -31,7 +32,7 @@ export default class PricingService {
         return currentPrice * (locationFactor + rateHistoryFactor + gallonsRequestedFactor + companyProfitFactor);
     }
 
-    static async calculateTotalPrice(profile) {
+    static async calculateTotalPrice(profile, gallonsRequested) {
         const margin = await PricingService.calculateMargin(profile, gallonsRequested);
         return currentPrice + margin;
     }
