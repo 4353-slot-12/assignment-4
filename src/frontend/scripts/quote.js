@@ -104,3 +104,8 @@ function submitQuote() {
         .then(data => populateResultFields(data))
         .catch(err => console.error(err));
 }
+
+function handleSubmit(event) {
+    event.preventDefault();
+    sendFormData();
+}
