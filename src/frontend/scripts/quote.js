@@ -63,16 +63,23 @@ function populateResultFields(data) {
 
 // Fire when the Get Quote button is pressed.
 function sendFormData() {
+    const payload = JSON.stringify({
+        deliveryDate: document.getElementById('delivery-date').value,
+        gallonsRequested: document.getElementById('gallons-requested').value,
+    })
+
     fetch('http://localhost:8080/api/quote', {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', 
         cache: 'no-cache', 
         credentials: 'same-origin', 
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
         },
         redirect: 'follow', 
         referrerPolicy: 'no-referrer', 
+        body: payload,
     })
         .then(response => response.json())
         .then(data => populateResultFields(data))
@@ -88,8 +95,8 @@ function submitQuote() {
 
     document.getElementById("GetQuote").value = "Johnny Bravo"; 
 
-    fetch('http://localhost:8080/api/quote', {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    fetch('http://localhost:8080/api/sendquote', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', 
         cache: 'no-cache', 
         credentials: 'same-origin', 
