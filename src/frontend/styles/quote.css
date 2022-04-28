@@ -37,3 +37,8 @@ button {
 button:hover {
     background-color: var(--dark);
 }
+
+button:disabled{
+  background-color: #cccccc;
+  color: #666666;
+}

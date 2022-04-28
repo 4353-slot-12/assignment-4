@@ -50,10 +50,10 @@ function populateResultFields(data) {
     unitPriceElement.innerHTML = data.suggestedPrice;
     totalPriceElement.innerHTML = data.totalPrice;
 
+    document.getElementById("quote-send-btn").disabled = false;
+
     unitPriceElement.classList.add('animate');
     totalPriceElement.classList.add('animate');
-
-    document.getElementById("quote-send-btn").setAttribute("disabled", false);
 
     setTimeout(() => {
         unitPriceElement.classList.remove('animate');
