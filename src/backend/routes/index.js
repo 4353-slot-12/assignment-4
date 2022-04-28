@@ -17,9 +17,9 @@ router.get('/logout', isAuth, UserController.logout);
 router.post('/profile', isAuth, ProfileController.create);
 router.put('/profile', isAuth, ProfileController.edit)
 router.get('/profile', isAuth, ProfileController.get);
-router.post('/quote', isAuth, QuoteController.create);
+router.post('/sendquote', isAuth, QuoteController.create);
 router.get('/history', isAuth, QuoteController.history);
-router.get('/quote', isAuth, QuoteController.get);
+router.post('/quote', isAuth, QuoteController.get);
 
 
 export default router;
