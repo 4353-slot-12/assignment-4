@@ -88,12 +88,13 @@ function sendFormData() {
 
 // Fire when the Submit Quote button is pressed.
 function submitQuote() {
+
+    console.log("twest test ");
+
     const payload = JSON.stringify({
         deliveryDate: document.getElementById('delivery-date').value,
         gallonsRequested: document.getElementById('gallons-requested').value,
     })
-
-    document.getElementById("GetQuote").value = "Johnny Bravo"; 
 
     fetch('http://localhost:8080/api/sendquote', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
